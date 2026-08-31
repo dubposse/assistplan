@@ -1,0 +1,652 @@
+body {
+    margin: 0;
+    padding: 1rem;
+    background: #91c5e0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: #222;
+    box-sizing: border-box;
+}
+
+#hauptbereich {
+    display: flex;
+    flex-direction: row; /* vertical stack */
+    justify-content: center;
+    align-items: center;
+    gap: 1rem; /* optional: Abstand zwischen Items */
+}
+
+.ep-cal-main {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.kollege-div {
+    margin-left: -10px;
+    padding: 4px 4px; /* mehr Innenabstand für größeren weißen Hintergrund */
+    background: #ffffff;
+    border: 1px solid rgba(10,102,194,0.08); /* subtle blue accent */
+    border-radius: 10px;
+    box-shadow: 0 6px 18px rgba(10,102,194,0.06);
+    transition: transform .12s ease, box-shadow .12s ease;
+}
+
+#start-kollege-input {
+    width: 40px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    padding: 1px 0.95rem;
+    border: 1px solid #b5d3e9;
+    border-radius: 6px;
+    background: linear-gradient(180deg,#f6fbfe 0%,#eef5fa 100%);
+    box-shadow: 0 1px 2px rgba(10,102,194,0.06);
+    transition: border-color .15s, box-shadow .
+
+    margin-bottom: 10px;
+    box-shadow: 0 2px 8px rgba(10,102,194,0.07);
+   
+}
+
+#start-kollege-input:focus {
+    border-color: #4fc3f7;
+    background: #e3f2fd;
+    box-shadow: 0 0 0 2px #b2ebf2;
+}
+
+select {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 1rem;
+    color: #0a4c85;
+    padding: 4px 1.1rem 4px 0.95rem;
+    border: 1px solid #b5d3e9;
+    border-radius: 6px;
+    background: linear-gradient(180deg, #f6fbfe 0%, #eef5fa 100%);
+    box-shadow: 0 1px 2px rgba(10,102,194,0.06);
+    transition: border-color .15s, box-shadow .15s, background .15s;
+
+    outline: none;
+    cursor: pointer;
+}                           
+
+
+#generate-einsatzplan-btn {
+    width: 165px;
+    padding: 2px 18px;
+    font: 600 1.08rem/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    color: #fff;
+    background: linear-gradient(90deg, #4fc3f7 0%, #b2ebf2 100%);
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 6px 22px rgba(80,200,255,0.18), 0 2px 8px rgba(0,0,0,0.06), 0 0 0 2px #e1f5fe inset;
+    letter-spacing: .02em;
+    cursor: pointer;
+    transition: background .18s, box-shadow .18s, transform .12s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    outline: none;
+    margin-top: 8px;
+    /* Glanz-Effekt */
+    position: relative;
+    overflow: hidden;
+    margin-top:  8px;
+}
+#generate-einsatzplan-btn::after {
+    content: "";
+    position: absolute;
+    left: -60%;
+    top: 0;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(120deg, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0.08) 100%);
+    transform: skewX(-25deg);
+    pointer-events: none;
+    transition: left .5s;
+}
+#generate-einsatzplan-btn:hover::after,
+#generate-einsatzplan-btn:focus-visible::after {
+    left: 110%;
+    transition: left .5s;
+}
+
+#generate-einsatzplan-btn:hover, 
+#generate-einsatzplan-btn:focus-visible {
+    background: linear-gradient(90deg, #81d4fa 0%, #e1f5fe 100%);
+    box-shadow: 0 8px 28px rgba(80,200,255,0.22), 0 3px 12px rgba(0,0,0,0.09), 0 0 0 2.5px #b2ebf2 inset;
+}
+
+#generate-einsatzplan-btn:active {
+    background: linear-gradient(90deg, #4fc3f7 0%, #c724ac 100%);
+    transform: translateY(2px) scale(0.98);
+    box-shadow: 0 2px 8px rgba(80,200,255,0.13);
+}
+
+#generate-einsatzplan-btn:disabled {
+    opacity: .55;
+    cursor: not-allowed;
+    background: #e1f5fe;
+    color: #6e8392;
+    box-shadow: none;
+}
+
+input[type="date"], #monat-input, #unbetreuter-tag-input  {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    padding: 1px 0.95rem;
+    border: 1px solid black;
+    border-radius: 5px;
+    box-shadow: none;
+    background: white;
+    transition: border-color .15s, box-shadow .15s;
+    width: 1rem;
+    
+}
+/* Das Platzhalter-Format (z.B. "tt.mm.jjjj") im Date-Input ist vom Browser abhängig und kann mit CSS nicht geändert werden.
+   Du kannst aber mit folgendem Trick den Placeholder-Text beeinflussen, indem du ein <input type="text"> mit eigenem Placeholder nutzt
+   und beim Fokus auf ein Date-Input wechselst (JavaScript nötig). 
+   Rein mit CSS ist das Standardformat nicht änderbar. */
+
+
+
+input[type="number"] {  
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    padding: 1px 0.95rem;
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 2.75rem;
+}
+
+
+#kollege1-schicht-praeferenz-input, #kollege2-schicht-praeferenz-input, #kollege3-schicht-praeferenz-input, #kollege4-schicht-praeferenz-input, #kollege5-schicht-praeferenz-input,
+#kollege6-schicht-praeferenz-input, #kollege7-schicht-praeferenz-input, #kollege8-schicht-praeferenz-input, #kollege9-schicht-praeferenz-input, #kollege0-schicht-praeferenz-input {
+    font-familiy: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: #222;
+    font-size: 0.95rem;
+    padding: 1px 0.55rem;
+     border: 1px solid black;
+    border-radius: 5px;
+    width: 58px;
+}
+
+#kollege1-hinzufuegen-btn, #kollege2-hinzufuegen-btn, #kollege3-hinzufuegen-btn, #kollege4-hinzufuegen-btn, #kollege5-hinzufuegen-btn,
+#kollege6-hinzufuegen-btn, #kollege7-hinzufuegen-btn, #kollege8-hinzufuegen-btn, #kollege9-hinzufuegen-btn, #kollege0-hinzufuegen-btn,
+#kollege1-wunscharbeiten-hinzufuegen-btn, #kollege2-wunscharbeiten-hinzufuegen-btn, #kollege3-wunscharbeiten-hinzufuegen-btn, #kollege4-wunscharbeiten-hinzufuegen-btn, #kollege5-wunscharbeiten-hinzufuegen-btn,
+#kollege6-wunscharbeiten-hinzufuegen-btn, #kollege7-wunscharbeiten-hinzufuegen-btn, #kollege8-wunscharbeiten-hinzufuegen-btn, #kollege9-wunscharbeiten-hinzufuegen-btn, #kollege0-wunscharbeiten-hinzufuegen-btn,
+#zeige-monat-details-btn{
+    width: 165px;
+    cursor: pointer;
+    -webkit-appearance: none;
+    appearance: none;
+    font: 500 0.85rem/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    letter-spacing: .015em;
+    padding: 6px 14px;
+    border: 1px solid #b5d3e9;
+    background: linear-gradient(180deg,#f6fbfe 0%,#eef5fa 100%);
+    color: #0a4c85;
+    border-radius: 6px;
+    box-shadow: 0 1px 2px rgba(0,0,0,.08);
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    text-decoration: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    transition: background .15s ease, box-shadow .15s ease, transform .15s ease;
+    margin-top: 2px;
+}
+
+#kollege1-hinzufuegen-btn:hover, #kollege2-hinzufuegen-btn:hover, #kollege3-hinzufuegen-btn:hover, #kollege4-hinzufuegen-btn:hover, #kollege5-hinzufuegen-btn:hover,
+#kollege6-hinzufuegen-btn:hover, #kollege7-hinzufuegen-btn:hover, #kollege8-hinzufuegen-btn:hover, #kollege9-hinzufuegen-btn:hover, #kollege0-hinzufuegen-btn:hover,
+#kollege1-wunscharbeiten-hinzufuegen-btn:hover, #kollege2-wunscharbeiten-hinzufuegen-btn:hover, #kollege3-wunscharbeiten-hinzufuegen-btn:hover, #kollege4-wunscharbeiten-hinzufuegen-btn:hover, #kollege5-wunscharbeiten-hinzufuegen-btn:hover,
+#kollege6-wunscharbeiten-hinzufuegen-btn:hover, #kollege7-wunscharbeiten-hinzufuegen-btn:hover, #kollege8-wunscharbeiten-hinzufuegen-btn:hover, #kollege9-wunscharbeiten-hinzufuegen-btn:hover, #kollege0-wunscharbeiten-hinzufuegen-btn:hover,
+#zeige-monat-details-btn:hover {
+    background: linear-gradient(180deg, #f3f8fd 0%, #e3eef8 100%);
+    color: #0a4c85;
+    border-color: #5fa8d3; /* etwas hellerer Rahmen */
+    box-shadow: 0 0 0 2px #b5d3e9, 0 1px 4px rgba(25,118,210,0.10);
+    transition: box-shadow 0.15s, background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+#kollege1-hinzufuegen-btn:active, #kollege2-hinzufuegen-btn:active, #kollege3-hinzufuegen-btn:active, #kollege4-hinzufuegen-btn:active, #kollege5-hinzufuegen-btn:active,
+#kollege6-hinzufuegen-btn:active, #kollege7-hinzufuegen-btn:active, #kollege8-hinzufuegen-btn:active, #kollege9-hinzufuegen-btn:active, #kollege0-hinzufuegen-btn:active,
+#kollege1-wunscharbeiten-hinzufuegen-btn:active, #kollege2-wunscharbeiten-hinzufuegen-btn:active, #kollege3-wunscharbeiten-hinzufuegen-btn:active, #kollege4-wunscharbeiten-hinzufuegen-btn:active, #kollege5-wunscharbeiten-hinzufuegen-btn:active,
+#kollege6-wunscharbeiten-hinzufuegen-btn:active, #kollege7-wunscharbeiten-hinzufuegen-btn:active, #kollege8-wunscharbeiten-hinzufuegen-btn:active, #kollege9-wunscharbeiten-hinzufuegen-btn:active, #kollege0-wunscharbeiten-hinzufuegen-btn:active,
+#zeige-monat-details-btn:active {
+    background-color: #c724ac;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}
+
+#kollege1-hinzufuegen-btn:focus-visible, #kollege2-hinzufuegen-btn:focus-visible, #kollege3-hinzufuegen-btn:focus-visible, #kollege4-hinzufuegen-btn:focus-visible, #kollege5-hinzufuegen-btn:focus-visible,
+#kollege6-hinzufuegen-btn:focus-visible, #kollege7-hinzufuegen-btn:focus-visible, #kollege8-hinzufuegen-btn:focus-visible, #kollege9-hinzufuegen-btn:focus-visible, #kollege0-hinzufuegen-btn:focus-visible,
+#kollege1-wunscharbeiten-hinzufuegen-btn:focus-visible, #kollege2-wunscharbeiten-hinzufuegen-btn:focus-visible, #kollege3-wunscharbeiten-hinzufuegen-btn:focus-visible, #kollege4-wunscharbeiten-hinzufuegen-btn:focus-visible, #kollege5-wunscharbeiten-hinzufuegen-btn:focus-visible,
+#kollege6-wunscharbeiten-hinzufuegen-btn:focus-visible, #kollege7-wunscharbeiten-hinzufuegen-btn:focus-visible, #kollege8-wunscharbeiten-hinzufuegen-btn:focus-visible, #kollege9-wunscharbeiten-hinzufuegen-btn:focus-visible, #kollege0-wunscharbeiten-hinzufuegen-btn:focus-visible,
+#zeige-monat-details-btn:focus-visible {
+    outline: 2px solid #7fb4d8;
+    outline-offset: 2px;
+}
+
+#kollege1-hinzufuegen-btn:disabled, #kollege2-hinzufuegen-btn:disabled, #kollege3-hinzufuegen-btn:disabled, #kollege4-hinzufuegen-btn:disabled, #kollege5-hinzufuegen-btn:disabled,
+#kollege6-hinzufuegen-btn:disabled, #kollege7-hinzufuegen-btn:disabled, #kollege8-hinzufuegen-btn:disabled, #kollege9-hinzufuegen-btn:disabled, #kollege0-hinzufuegen-btn:disabled,
+#kollege1-wunscharbeiten-hinzufuegen-btn:disabled, #kollege2-wunscharbeiten-hinzufuegen-btn:disabled, #kollege3-wunscharbeiten-hinzufuegen-btn:disabled, #kollege4-wunscharbeiten-hinzufuegen-btn:disabled, #kollege5-wunscharbeiten-hinzufuegen-btn:disabled,
+#kollege6-wunscharbeiten-hinzufuegen-btn:disabled, #kollege7-wunscharbeiten-hinzufuegen-btn:disabled, #kollege8-wunscharbeiten-hinzufuegen-btn:disabled, #kollege9-wunscharbeiten-hinzufuegen-btn:disabled, #kollege0-wunscharbeiten-hinzufuegen-btn:disabled,
+#zeige-monat-details-btn:disabled {
+    opacity: .5;
+    cursor: not-allowed;
+    background: #f3f7fa;
+    color: #6e8392;
+    border-color: #d2e2ec;
+    box-shadow: none;
+}
+
+#kollege1-name-input, #kollege2-name-input, #kollege3-name-input, #kollege4-name-input, #kollege5-name-input,
+#kollege6-name-input, #kollege7-name-input, #kollege8-name-input, #kollege9-name-input, #kollege0-name-input,
+#location-name-input {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: #222;
+    font-size: 1.25rem;
+    width: 157px;
+    border-radius: 5px;
+    background-color: white;
+    margin-bottom: 2px;
+    margin-top: 2px;
+
+}
+
+#kollege1-wunscharbeiten-schicht-input, #kollege2-wunscharbeiten-schicht-input, #kollege3-wunscharbeiten-schicht-input, #kollege4-wunscharbeiten-schicht-input, #kollege5-wunscharbeiten-schicht-input,
+#kollege6-wunscharbeiten-schicht-input, #kollege7-wunscharbeiten-schicht-input, #kollege8-wunscharbeiten-schicht-input, #kollege9-wunscharbeiten-schicht-input, #kollege0-wunscharbeiten-schicht-input
+ {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    padding: 1px 0.95rem;
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 1.5rem;
+  
+    
+}
+ 
+#monat-details-input-container,
+#monat-details-ausgabe {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: #222;
+    box-sizing: border-box;
+}
+
+
+
+/* card-like, subtle shadow, amerikanisch "cleane" UI mit blauem Akzent */
+#monat-details-input-container {
+    background: #ffffff;
+    border: 1px solid rgba(0,0,0,0.08);
+    padding: 16px;
+    margin-bottom: 16px;
+    width: 320px;
+    max-width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+    transition: transform .12s ease, box-shadow .12s ease;
+    position: relative;
+   
+    }
+
+
+
+/* Ausgabe-Bereich für Monatsdetails: zeigt Rückmeldung zu Kollegen-Eingaben und allgemeinen Einstellungen */
+#monat-details-ausgabe {
+    background: #f8fbfd;
+    border: 1px solid #d2e6f3;
+    padding: 12px 14px;
+    margin-bottom: 14px;
+    flex: 1;
+    min-width: 220px;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(10,102,194,0.03);
+    font-size: 0.96rem;
+    line-height: 1.45;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    display: none;
+    overflow-y: auto;
+}
+#monat-details-ausgabe h3,
+#monat-details-ausgabe h4 {
+    margin-top: 0;
+    margin-bottom: 0.35rem;
+    font-weight: 500;
+    color: #0a66c2;
+    font-size: 1.08rem;
+}
+#monat-details-ausgabe ul,
+#monat-details-ausgabe ol {
+    margin: 0 0 0.35rem 1.1rem;
+    padding: 0;
+    font-size: 0.95rem;
+}
+#monat-details-ausgabe li {
+    margin-bottom: 0.18rem;
+    padding-left: 0.15em;
+}
+#monat-details-ausgabe p {
+    margin: 0 0 0.35rem 0;
+    font-size: 0.96rem;
+}
+
+h1 {
+    font-size: 1.8rem;
+    margin: 0;
+    margin-bottom: 10px;
+    color: #0a66c2;
+}
+
+#app-infos {
+    font-size: 0.95rem;
+    margin: 8px 0;
+    margin-top: 1px;
+    color: #555;
+}
+
+/* Ausgabe als flexibles Panel
+#monat-details-ausgabe {
+    background: #ffffff;
+    border: 1px solid rgba(0,0,0,0.06);
+    padding: 16px;
+    margin-bottom: 16px;
+    flex: 1;
+    min-width: 260px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+}  */
+
+
+/* responsiv: auf kleinen Bildschirmen 100% Breite */
+@media (max-width: 600px) {
+    #monat-details-input-container,
+    #monat-details-ausgabe {
+        width: 100%;
+        min-width: 0;
+    }
+    #Benutzerdokumentation {
+       display: none;
+    }
+}
+
+#kollegen-1bis0-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: flex-start;
+    align-items: center;
+    background: #ffffff;
+    border: 1px solid rgba(10,102,194,0.08); /* subtle blue accent */
+    padding: 12px;
+    border-radius: 10px;
+    box-shadow: 0 6px 18px rgba(10,102,194,0.06);
+    transition: transform .12s ease, box-shadow .12s ease;
+}
+
+/* optional child item style for a clean "American" chip/button look */
+#kollegen-1bis0-container .kollege {
+    display: inline-flex;
+    gap: 0.5rem;
+    align-items: center;
+    padding: 8px 10px;
+    background: #f6fbff; /* very light blue */
+    border: 1px solid rgba(10,102,194,0.06);
+    border-radius: 8px;
+    color: #0a66c2;
+    font-weight: 600;
+}
+
+#allgemeine_einstellungen_ausblenden-btn {
+    margin-top: -35px;
+    margin-left: 125px;
+
+    color: #0a66c2;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-decoration:dotted;
+    padding: 0;
+    display: none;
+}
+
+
+/* Reset-Buttons */
+button[type="button"]
+ {
+    width: 65px;
+    cursor: pointer;
+    -webkit-appearance: none;
+    appearance: none;
+    font: 500 0.85rem/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    letter-spacing: .015em;
+    padding: 6px 14px;
+    border: 1px solid #b5d3e9;
+    background: linear-gradient(180deg,#f6fbfe 0%,#eef5fa 100%);
+    color: #0a4c85;
+    border-radius: 6px;
+    box-shadow: 0 1px 2px rgba(0,0,0,.08);
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    text-decoration: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    transition: background .15s ease, box-shadow .15s ease, transform .15s ease;
+}
+
+button[type="button"]:hover {
+    background: linear-gradient(180deg, #e3f2fd 0%, #90caf9 100%);
+    color: #0a4c85;
+    border-color: #42a5f5;
+    box-shadow: 0 0 0 2.5px #90caf9, 0 2px 8px rgba(66,165,245,0.18);
+    transition: background 0.15s, color 0.15s, border-color 0.15s, box-shadow 0.15s;
+}
+
+button[type="button"]:active {
+    background-color: #c724ac;
+        box-shadow: 0 5px #666;
+        transform: translateY(4px);
+}
+button[type="button"]:focus-visible {
+    outline: 2px solid #7fb4d8;
+    outline-offset: 2px;
+}
+button[type="button"]:disabled {
+    opacity: .5;
+    cursor: not-allowed;
+    background: #f3f7fa;
+    color: #6e8392;
+    border-color: #d2e2ec;
+    box-shadow: none;
+}
+
+
+
+ 
+
+/* responsive: center and stack on small screens */
+@media (max-width: 600px) {
+    #kollegen-1bis0-container {
+        justify-content: center;
+    }
+    #kollegen-1bis0-container .kollege {
+        width: 100%;
+        justify-content: center;
+    }
+
+    #hauptbereich {
+        display: flex;
+        flex-direction: column; /* vertical stack */
+        justify-content: center;
+        align-items: center;
+        gap: 1rem; /* optional: Abstand zwischen Items */
+    }
+
+
+}
+
+/* responsive: medium screens - side by side with equal width */
+@media (min-width: 400px) and (max-width: 3400px) {
+  #monat-details-input-container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        height: auto;
+        
+    }
+
+    #monat-details-input-container {
+        width: calc(25vw+4px);
+        flex-flow: row wrap;
+        overflow-x: hidden;
+        
+    }
+
+    #monat-details-ausgabe { 
+        max-height: calc(97vh - 2px);              /* 70vh ursprünglich */ 
+        max-width: calc(100vw - 4px); /* calc(70vw - 4px) ursprünglich */ 
+        overflow-y: auto;
+        font-size: small;
+        margin-top: 0px;
+
+    }
+   
+
+
+    #hauptbereich {
+        display: flex;
+        flex-direction: row; /* horizontal side by side */
+        justify-content: center;
+        align-items: flex-start;
+        gap: 1rem; /* optional: Abstand zwischen Items */
+     
+    }
+
+
+
+      #location-name-input {
+        width: 200px;
+    }
+
+
+     
+}
+
+
+
+
+
+
+
+
+#mvp-hinweis {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    background: #ffffff;
+    border: 1px solid rgba(10,102,194,0.08);
+    color: #0f1724;
+    padding: 14px;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(15,23,42,0.06);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    box-sizing: border-box;
+    transition: transform .12s ease, box-shadow .12s ease;
+    margin-top: 8px;
+}
+
+/* clean circular info symbol (SVG-free, high-contrast) */
+#mvp-hinweis::before {
+    content: "i";
+    flex: 0 0 36px;
+    width: 36px;
+    height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: linear-gradient(180deg, #0a66c2 0%, #0b56b0 100%);
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 0.95rem;
+    box-shadow: 0 4px 12px rgba(10,102,194,0.12);
+    line-height: 1;
+}
+
+
+
+/* responsive: Hinweisbox auf kleinen Bildschirmen anpassen */
+@media (max-width: 600px) {
+    #mvp-hinweis {
+        font-size: 0.9rem;
+        padding: 10px 12px;
+    }
+    #mvp-hinweis .title {
+        font-size: 0.95rem;
+    }
+    #mvp-hinweis .text {
+        font-size: 0.88rem;
+    }
+}
+
+
+   
+
+
+/* Print-specific rules */
+@page {
+    margin: 12mm;
+}
+
+@media print {
+    /* utility class: füge .no-print zu HTML-Elementen hinzu, die nicht gedruckt werden sollen */
+    .no-print { display: none !important; }
+
+    /* typische interaktive / dekorative Elemente ausblenden */
+    button,
+    textarea,
+    select,
+    .btn,
+    .controls,
+    .kollege,
+    #mvp-hinweis,
+    #kollegen-1bis0-container,
+    #monat-details-input-container { display: none !important; }
+
+    /* Ausgabe-Bereich druckfreundlich machen */
+    #monat-details-ausgabe {
+        display: block !important;
+        box-shadow: none !important;
+        background: transparent !important;
+        border: none !important;
+        color: #000 !important;
+    }
+
+    /* Generelle Bereinigung für Druck: keine Schatten, keine Hintergründe */
+    * {
+        text-shadow: none !important;
+        box-shadow: none !important;
+        background-image: none !important;
+        -webkit-print-color-adjust: exact !important;
+        color-adjust: exact !important;
+    }
+
+    /* Verhindere Seitenumbrüche innerhalb wichtiger Container */
+    #monat-details-ausgabe,
+    #monat-details-input-container,
+    #kollegen-1bis0-container {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+
+    /* Seitenränder / Layout für Druck */
+    body, html {
+        margin: 0;
+        background: #fff !important;
+        width: 100%; 
+    }
+}
+
+

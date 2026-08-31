@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AssistPlan ist ein digitaler Einsatzplaner für Betreuung und Pflege. Plane Einsätze, Mitarbeitende und Touren einfach, übersichtlich und effizient.">
+    <meta name="author" content="Matthias Brehm">
+    <link rel="stylesheet" href="design.css">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <title>AssistPlan - Digitaler Einsatzplaner für Betreuung & Pflege</title>
+</head>
+<body>
+    <button 
+        id="Benutzerdokumentation"
+        style="
+            position: absolute; 
+            top: 18px; 
+            right: 24px; 
+            z-index: 1000; 
+            background: #2a5d9f; 
+            color: #fff; 
+            border: none; 
+            border-radius: 8px; 
+            padding: 0.6em 1.2em; 
+            font-size: 0.95rem; 
+            font-weight: 500; 
+            box-shadow: 0 2px 8px rgba(42,93,159,0.08); 
+            cursor: pointer; 
+            transition: background 0.18s;
+            align-items: center;
+            gap: 0.5em;
+        " 
+        onmouseover="this.style.background='#17406e'" 
+        onmouseout="this.style.background='#2a5d9f'"
+        onclick="window.open('user-doku.html', '_blank')"
+    >
+        <svg width="22" height="22" fill="none" viewBox="0 0 24 24" style="vertical-align:middle;">
+            <circle cx="12" cy="12" r="10" fill="#fff" opacity="0.18"/>
+            <path d="M12 17h.01M12 7a3 3 0 0 1 3 3c0 1.5-2 2-2 4" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Benutzerhandbuch
+    </button>
+
+
+                         <!-- Step  1 -->
+
+                         <div id="hauptbereich">
+
+<div class="hidden" id="monat-details-input-container">
+    
+  <h1>AssistPlan</h1> 
+  <button id="allgemeine_einstellungen_ausblenden-btn" style="font-size: 1rem;" onclick="this.disabled=true; allgemeine_einstellungen_ausblenden();">ⓧ</button> <br><br>
+
+  
+  <!--    <p id="app-infos">Versionsnummer v12a</p> 
+        <p id="app-infos">Entwickler: Matthias Brehm</p> -->
+
+        <!-- App Info Section 
+    <section style="background: #f5f7fa; border-radius: 10px; padding: 1rem; margin-bottom: 1rem; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
+        <h2 style="margin-top:0; font-size:1.4rem; color:#2a5d9f; display:flex; align-items:center; gap:0.5em;">
+            <svg width="28" height="28" fill="none" viewBox="0 0 24 24" style="vertical-align:middle;"><circle cx="12" cy="12" r="10" fill="#2a5d9f"/><path d="M8 12l2 2 4-4" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            AssistPlan <span style="font-size: 50px;">  🪴</span>
+        </h2>
+        <p style="margin:0.5em 0 0 0; color:#333; font-size:1.05rem;">
+            Der ultimative Einsatzplaner: Nie wieder Dienstplan-Frust! Wünsche werden Wirklichkeit, Kollegen jubeln, der Chef tanzt – und du hast endlich Zeit für das echte Leben. Einfach. Magisch. Unschlagbar.
+<br>
+            <span style="color:#2a5d9f; font-weight:500;">Einfach. Magisch. Unschlagbar.</span>
+        </p>
+    </section> -->
+      
+
+   
+
+<!-- Monatserkennung --> 
+
+<b> 
+    LOCATION <br>
+    <input type="text" id="location-name-input" name="location-name-input" placeholder="Arbeitsort" style="width: 250px;"> <br>
+
+    <label for="monat-input">Monat</label> <br> 
+    <input type="month" id="monat-input" name="monat-input" min="2026-01" value="2026-02">   <br>
+
+<!-- Unbetreute Tage -->
+
+    <label for="unbetreuter-tag-input">Unbetreute Tage <br></label>
+    <input type="date" id="unbetreuter-tag-input" name="unbetreuter-tag-input" min="2026-01-01"> <br>
+
+
+<!-- Schichtsystem -->
+    <label for ="schichtsystem-input">Schichtsystem </label> <br>
+    <input type="number" id="schichtsystem-input" name="schichtsystem-input" min="1" max="3" value="3"> <br> <br>
+
+<label for="start-kollege-input">Auto-Verteilung-Start</label> <br>
+
+    <select id="start-kollege-input" name="start-kollege-input">
+        <option value="kollege1">Kollege 1</option>
+        <option value="kollege2">Kollege 2</option>
+        <option value="kollege3">Kollege 3</option>
+        <option value="kollege4">Kollege 4</option>
+        <option value="kollege5">Kollege 5</option>
+        <option value="kollege6">Kollege 6</option>
+        <option value="kollege7">Kollege 7</option>
+        <option value="kollege8">Kollege 8</option>
+        <option value="kollege9">Kollege 9</option>
+        <option value="kollege0">Kollege 0</option>
+    </select> <br> <br>
+
+
+
+    <button id="zeige-monat-details-btn" onclick="this.disabled=true; this.type='button'">Aktualisieren</button> <br>  
+    <button type="button" onclick="monat_input_reset()">Reset</button> <br> 
+
+    </b>
+        <button id="generate-einsatzplan-btn" onclick="this.disabled=true; generate_einsatzplan_with_rules();" disabled>Einsatzplan generieren</button>
+
+        <!-- Aktivierungs-Skript für den Generieren-Button -->
+    <script>
+    let monatSelected = false;
+    let detailsClicked = false;
+
+    document.getElementById('monat-input').addEventListener('input', function() {
+        monatSelected = !!this.value;
+        updateGenerateButton();
+    });
+
+    document.getElementById('zeige-monat-details-btn').addEventListener('click', function() {
+        detailsClicked = true;
+        updateGenerateButton();
+        document.getElementById('Benutzerdokumentation').style.display = 'none';
+    });
+
+    function updateGenerateButton() {
+        document.getElementById('generate-einsatzplan-btn').disabled = !(monatSelected && detailsClicked);
+    }
+    </script>
+
+
+    
+</div>
+                         <!-- Bestätigen 1 -->
+    <div id="monat-details-ausgabe"></div>
+    <aside id="mvp-hinweis" aria-labelledby="mvp-hinweis-title" style="max-width:640px; margin:1rem 0;">
+        <details open>
+            <summary id="mvp-hinweis-title">
+                <strong>Early Access  ✨ Aktuell nur in Google Chrome (Desktop) nutzbar. </strong>
+                <span style="display:block; font-weight:normal; margin-top:0.25rem;">
+                    Bitte die Beta-Hinweise kurz prüfen und bestätigen, dann gehts los.
+                </span>
+            </summary>
+
+            <p>Diese Web‑App befindet sich in einer frühen Testphase (MVP) und wird ausschließlich zu Evaluierungs- und Demonstrationszwecken bereitgestellt.</p>
+
+            <h4>Wichtige Hinweise</h4>
+            <ul>
+                <li>Keine Speicherung: Alle Eingaben sind nur lokal im Browser und gehen beim Schließen verloren.</li>
+                <li>Nicht für produktiven Einsatz geeignet.</li>
+                <li>Funktionen können unvollständig sein oder sich jederzeit ändern.</li>
+                <li>Nutzung auf eigene Verantwortung; keine Garantie oder Haftung für Schäden oder Datenverluste.</li>
+            </ul>
+
+            <h4>Daten &amp; Datenschutz</h4>
+            <p>Es werden keine personenbezogenen Daten gespeichert oder verarbeitet.</p>
+
+            <h4>Kontakt / Feedback</h4>
+            <p>Feedback per E‑Mail: <a href="mailto:matthiasbrehm1@gmx.de">matthiasbrehm1@gmx.de</a></p>
+
+            <small>Durch die Nutzung erklärst du dich mit diesen Testbedingungen einverstanden.</small>
+        </details>
+    </aside>
+ 
+                             </div> 
+
+                           
+
+
+
+
+
+
+
+                         <!-- Step  2 -->
+
+<div id="kollegen-1bis0-container" style="display: flex; justify-content: center; align-items: center; ">
+<div class="kollege-div">
+<!-- Kollegen 1 hinzufügen -->
+    <b>Kollege 1</b><br>
+    <input type="text" id="kollege1-name-input" name="kollege1-name-input" placeholder="Name"> <br>
+
+    <!-- Maximale Arbeitstage im Monat für Kollege 1 -->
+    <label for="kollege1-max-arbeitstage-input">Arbeitstage</label> 
+    <input type="number" id="kollege1-max-arbeitstage-input" name="kollege1-max-arbeitstage-input" min="0" max="31" value="31"> <br>
+
+    <!-- Wunschfreie Tage & Schicht Abneigung -->
+    <label for="kollege1-wunschfrei-input">Wunschfrei</label>
+    <input type="date" id="kollege1-wunschfrei-input" name="kollege1-wunschfrei-input" min="2026-01-01">  <br>
+
+    <label for="kollege1-schicht-praeferenz-input">Schichten &nbsp</label> 
+    <input type="text" id="kollege1-schicht-praeferenz-input" name="kollege1-schicht-praeferenz-input" placeholder="1" size="5"> <br>
+    
+    <button id="kollege1-hinzufuegen-btn">Aktualisieren</button> <br> 
+    <button type="button" onclick="kollege1_input_reset()">Reset</button><br><br>
+
+    <!-- Wunsch-Arbeitstage & Schicht -->
+    <label for="kollege1-wunscharbeiten-input">Wunsch-Arbeitstage🪴</label> <br>
+    <input type="date" id="kollege1-wunscharbeiten-input" name="kollege1-wunscharbeiten-input" min="2026-01-01"> 
+
+    <label for="kollege1-wunscharbeiten-schicht-input">Schicht</label>
+    <input type="number" id="kollege1-wunscharbeiten-schicht-input" name="kollege1-wunscharbeiten-schicht-input" min="1" max="3" value="0"> <br>
+
+    <button id="kollege1-wunscharbeiten-hinzufuegen-btn">Hinzufügen</button> <br>
+    <button type="button" onclick="kollege1_wunscharbeiten_input_reset()">Reset</button><br><br>
+</div>
+<div class="kollege-div">
+<!-- Kollegen 2 hinzufügen -->
+    <b>Kollege 2</b><br>
+    <input type="text" id="kollege2-name-input" name="kollege2-name-input" placeholder="Name"> <br>
+
+    <!-- Maximale Arbeitstage im Monat für Kollege 2 -->
+    <label for="kollege2-max-arbeitstage-input">Arbeitstage</label> 
+    <input type="number" id="kollege2-max-arbeitstage-input" name="kollege2-max-arbeitstage-input" min="0" max="31" value="31"> <br>
+    
+    <!-- Wunschfreie Tage & Schicht Abneigung -->
+    <label for="kollege2-wunschfrei-input">Wunschfrei</label> 
+    <input type="date" id="kollege2-wunschfrei-input" name="kollege2-wunschfrei-input" min="2026-01-01">  <br>
+
+    <label for="kollege2-schicht-praeferenz-input">Schichten &nbsp;</label> 
+    <input type="text" id="kollege2-schicht-praeferenz-input" name="kollege2-schicht-praeferenz-input" placeholder="1+2" size="5"> <br>
+    
+    <button id="kollege2-hinzufuegen-btn">Aktualisieren</button> <br> 
+    <button type="button" onclick="kollege2_input_reset()">Reset</button><br><br>
+
+    <!-- Wunsch-Arbeitstage & Schicht -->
+    <label for="kollege2-wunscharbeiten-input">Wunsch-Arbeitstage🪴</label> <br>
+    <input type="date" id="kollege2-wunscharbeiten-input" name="kollege2-wunscharbeiten-input" min="2026-01-01"> 
+
+    <label for="kollege2-wunscharbeiten-schicht-input">Schicht</label>
+    <input type="number" id="kollege2-wunscharbeiten-schicht-input" name="kollege2-wunscharbeiten-schicht-input" min="1" max="3" value="0"> <br>
+
+    <button id="kollege2-wunscharbeiten-hinzufuegen-btn">Hinzufügen</button> <br>
+    <button type="button" onclick="kollege2_wunscharbeiten_input_reset()">Reset</button><br><br>
+</div>
+<div class="kollege-div">
+<!-- Kollegen 3 hinzufügen -->
+    <b>Kollege 3</b><br>
+    <input type="text" id="kollege3-name-input" name="kollege3-name-input" placeholder="Name"> <br>
+
+    <!-- Maximale Arbeitstage im Monat für Kollege 3 -->
+    <label for="kollege3-max-arbeitstage-input">Arbeitstage</label> 
+    <input type="number" id="kollege3-max-arbeitstage-input" name="kollege3-max-arbeitstage-input" min="0" max="31" value="31"> <br>
+    
+    <!-- Wunschfreie Tage & Schicht Abneigung -->
+    <label for="kollege3-wunschfrei-input">Wunschfrei</label> 
+    <input type="date" id="kollege3-wunschfrei-input" name="kollege3-wunschfrei-input" min="2026-01-01">  <br>
+
+    <label for="kollege3-schicht-praeferenz-input">Schichten &nbsp;</label> 
+    <input type="text" id="kollege3-schicht-praeferenz-input" name="kollege3-schicht-praeferenz-input" placeholder="3" size="5"> <br>
+    
+    <button id="kollege3-hinzufuegen-btn">Aktualisieren</button> <br> 
+    <button type="button" onclick="kollege3_input_reset()">Reset</button><br><br>
+
+    <!-- Wunsch-Arbeitstage & Schicht -->
+    <label for="kollege3-wunscharbeiten-input">Wunsch-Arbeitstage🪴</label> <br>
+    <input type="date" id="kollege3-wunscharbeiten-input" name="kollege3-wunscharbeiten-input" min="2026-01-01"> 
+
+    <label for="kollege3-wunscharbeiten-schicht-input">Schicht</label>
+    <input type="number" id="kollege3-wunscharbeiten-schicht-input" name="kollege3-wunscharbeiten-schicht-input" min="1" max="3" value="0"> <br>
+
+    <button id="kollege3-wunscharbeiten-hinzufuegen-btn">Hinzufügen</button> <br>
+    <button type="button" onclick="kollege3_wunscharbeiten_input_reset()">Reset</button><br><br>
+</div>
+<div class="kollege-div">
+<!-- Kollegen 4 hinzufügen -->
+    <b>Kollege 4</b><br>
+    <input type="text" id="kollege4-name-input" name="kollege4-name-input" placeholder="Name"> <br>
+
+    <!-- Maximale Arbeitstage im Monat für Kollege 4 -->
+    <label for="kollege4-max-arbeitstage-input">Arbeitstage</label> 
+    <input type="number" id="kollege4-max-arbeitstage-input" name="kollege4-max-arbeitstage-input" min="0" max="31" value="31"> <br>
+    
+    <!-- Wunschfreie Tage & Schicht Abneigung -->
+    <label for="kollege4-wunschfrei-input">Wunschfrei</label> 
+    <input type="date" id="kollege4-wunschfrei-input" name="kollege4-wunschfrei-input" min="2026-01-01">  <br>
+
+    <label for="kollege4-schicht-praeferenz-input">Schichten &nbsp;</label> 
+    <input type="text" id="kollege4-schicht-praeferenz-input" name="kollege4-schicht-praeferenz-input" placeholder="1+2+3" size="5"> <br>
+    
+    <button id="kollege4-hinzufuegen-btn">Aktualisieren</button> <br> 
+    <button type="button" onclick="kollege4_input_reset()">Reset</button><br><br>
+
+    <!-- Wunsch-Arbeitstage & Schicht -->
+    <label for="kollege4-wunscharbeiten-input">Wunsch-Arbeitstage🪴</label> <br>
+    <input type="date" id="kollege4-wunscharbeiten-input" name="kollege4-wunscharbeiten-input " min="2026-01-01"> 
+
+    <label for="kollege4-wunscharbeiten-schicht-input">Schicht</label>
+    <input type="number" id="kollege4-wunscharbeiten-schicht-input" name="kollege4-wunscharbeiten-schicht-input" min="1" max="3" value="0"> <br>
+
+    <button id="kollege4-wunscharbeiten-hinzufuegen-btn">Hinzufügen</button> <br>
+    <button type="button" onclick="kollege4_wunscharbeiten_input_reset()">Reset</button><br><br>
+</div>
+<div class="kollege-div">
+<!-- Kollegen 5 hinzufügen -->
+    <b>Kollege 5</b><br>
+    <input type="text" id="kollege5-name-input" name="kollege5-name-input" placeholder="Name"> <br>
+
+    <!-- Maximale Arbeitstage im Monat für Kollege 5 -->
+    <label for="kollege5-max-arbeitstage-input">Arbeitstage</label> 
+    <input type="number" id="kollege5-max-arbeitstage-input" name="kollege5-max-arbeitstage-input" min="0" max="31" value="31"> <br>
+    
+    <!-- Wunschfreie Tage & Schicht Abneigung -->
+    <label for="kollege5-wunschfrei-input">Wunschfrei</label> 
+    <input type="date" id="kollege5-wunschfrei-input" name="kollege5-wunschfrei-input" min="2026-01-01">  <br>
+
+    <label for="kollege5-schicht-praeferenz-input">Schichten &nbsp;</label> 
+    <input type="text" id="kollege5-schicht-praeferenz-input" name="kollege5-schicht-praeferenz-input" placeholder="" size="5"> <br>
+    
+    <button id="kollege5-hinzufuegen-btn">Aktualisieren</button> <br> 
+    <button type="button" onclick="kollege5_input_reset()">Reset</button><br><br>
+
+    <!-- Wunsch-Arbeitstage & Schicht -->
+    <label for="kollege5-wunscharbeiten-input">Wunsch-Arbeitstage🪴</label> <br>
+    <input type="date" id="kollege5-wunscharbeiten-input" name="kollege5-wunscharbeiten-input " min="2026-01-01"> 
+
+    <label for="kollege5-wunscharbeiten-schicht-input">Schicht</label>
+    <input type="number" id="kollege5-wunscharbeiten-schicht-input" name="kollege5-wunscharbeiten-schicht-input" min="1" max="3" value="0"> <br>
+
+    <button id="kollege5-wunscharbeiten-hinzufuegen-btn">Hinzufügen</button> <br>
+    <button type="button" onclick="kollege5_wunscharbeiten_input_reset()">Reset</button><br><br>
+</div>
+
+                        <!-- Kollegen 6 bis 0 werden hier hinzugefügt -->
+
+<div class="kollege-div">
+<!-- Kollegen 6 hinzufügen -->
+    <b>Kollege 6</b><br>
+    <input type="text" id="kollege6-name-input" name="kollege6-name-input" placeholder="Name"> <br>
+
+    <!-- Maximale Arbeitstage im Monat für Kollege 6 -->
+    <label for="kollege6-max-arbeitstage-input">Arbeitstage</label> 
+    <input type="number" id="kollege6-max-arbeitstage-input" name="kollege6-max-arbeitstage-input" min="0" max="31" value="31"> <br>
+    
+    <!-- Wunschfreie Tage & Schicht Abneigung -->
+    <label for="kollege6-wunschfrei-input">Wunschfrei</label> 
+    <input type="date" id="kollege6-wunschfrei-input" name="kollege6-wunschfrei-input" min="2026-01-01">  <br>
+
+    <label for="kollege6-schicht-praeferenz-input">Schichten &nbsp;</label> 
+    <input type="text" id="kollege6-schicht-praeferenz-input" name="kollege6-schicht-praeferenz-input" placeholder="" size="5"> <br>
+    
+    <button id="kollege6-hinzufuegen-btn">Aktualisieren</button> <br> 
+    <button type="button" onclick="kollege6_input_reset()">Reset</button><br><br>
+
+    <!-- Wunsch-Arbeitstage & Schicht -->
+    <label for="kollege6-wunscharbeiten-input">Wunsch-Arbeitstage🪴</label> <br>
+    <input type="date" id="kollege6-wunscharbeiten-input" name="kollege6-wunscharbeiten-input " min="2026-01-01"> 
+
+    <label for="kollege6-wunscharbeiten-schicht-input">Schicht</label>
+    <input type="number" id="kollege6-wunscharbeiten-schicht-input" name="kollege6-wunscharbeiten-schicht-input" min="1" max="3" value="0"> <br>
+
+    <button id="kollege6-wunscharbeiten-hinzufuegen-btn">Hinzufügen</button> <br>
+    <button type="button" onclick="kollege6_wunscharbeiten_input_reset()">Reset</button><br><br>
+</div>
+<div class="kollege-div">
+<!-- Kollegen 7 hinzufügen -->
+    <b>Kollege 7</b><br>
+    <input type="text" id="kollege7-name-input" name="kollege7-name-input" placeholder="Name"> <br>
+
+    <!-- Maximale Arbeitstage im Monat für Kollege 7 -->
+    <label for="kollege7-max-arbeitstage-input">Arbeitstage</label> 
+    <input type="number" id="kollege7-max-arbeitstage-input" name="kollege7-max-arbeitstage-input" min="0" max="31" value="31"> <br>
+    
+    <!-- Wunschfreie Tage & Schicht Abneigung -->
+    <label for="kollege7-wunschfrei-input">Wunschfrei</label> 
+    <input type="date" id="kollege7-wunschfrei-input" name="kollege7-wunschfrei-input" min="2026-01-01">  <br>
+
+    <label for="kollege7-schicht-praeferenz-input">Schichten &nbsp;</label> 
+    <input type="text" id="kollege7-schicht-praeferenz-input" name="kollege7-schicht-praeferenz-input" placeholder="" size="5"> <br>
+    
+    <button id="kollege7-hinzufuegen-btn">Aktualisieren</button> <br> 
+    <button type="button" onclick="kollege7_input_reset()">Reset</button><br><br>
+
+    <!-- Wunsch-Arbeitstage & Schicht -->
+    <label for="kollege7-wunscharbeiten-input">Wunsch-Arbeitstage🪴</label> <br>
+    <input type="date" id="kollege7-wunscharbeiten-input" name="kollege7-wunscharbeiten-input" min="2026-01-01"> 
+
+    <label for="kollege7-wunscharbeiten-schicht-input">Schicht</label>
+    <input type="number" id="kollege7-wunscharbeiten-schicht-input" name="kollege7-wunscharbeiten-schicht-input" min="1" max="3" value="0"> <br>
+
+    <button id="kollege7-wunscharbeiten-hinzufuegen-btn">Hinzufügen</button> <br>
+    <button type="button" onclick="kollege7_wunscharbeiten_input_reset()">Reset</button><br><br>
+</div>
+<div class="kollege-div">
+<!-- Kollegen 8 hinzufügen -->
+    <b>Kollege 8</b><br>
+    <input type="text" id="kollege8-name-input" name="kollege8-name-input" placeholder="Name"> <br>
+
+    <!-- Maximale Arbeitstage im Monat für Kollege 8 -->
+    <label for="kollege8-max-arbeitstage-input">Arbeitstage</label> 
+    <input type="number" id="kollege8-max-arbeitstage-input" name="kollege8-max-arbeitstage-input" min="0" max="31" value="31"> <br>
+    
+    <!-- Wunschfreie Tage & Schicht Abneigung -->
+    <label for="kollege8-wunschfrei-input">Wunschfrei</label> 
+    <input type="date" id="kollege8-wunschfrei-input" name="kollege8-wunschfrei-input" min="2026-01-01">  <br>
+
+    <label for="kollege8-schicht-praeferenz-input">Schichten &nbsp;</label> 
+    <input type="text" id="kollege8-schicht-praeferenz-input" name="kollege8-schicht-praeferenz-input" placeholder="" size="5"> <br>
+    
+    <button id="kollege8-hinzufuegen-btn">Aktualisieren</button> <br> 
+    <button type="button" onclick="kollege8_input_reset()">Reset</button><br><br>
+
+    <!-- Wunsch-Arbeitstage & Schicht -->
+    <label for="kollege8-wunscharbeiten-input">Wunsch-Arbeitstage🪴</label> <br>
+    <input type="date" id="kollege8-wunscharbeiten-input" name="kollege8-wunscharbeiten-input " min="2026-01-01"> 
+
+    <label for="kollege8-wunscharbeiten-schicht-input">Schicht</label>
+    <input type="number" id="kollege8-wunscharbeiten-schicht-input" name="kollege8-wunscharbeiten-schicht-input" min="1" max="3" value="0"> <br>
+
+    <button id="kollege8-wunscharbeiten-hinzufuegen-btn">Hinzufügen</button> <br>
+    <button type="button" onclick="kollege8_wunscharbeiten_input_reset()">Reset</button><br><br>
+</div>
+<div class="kollege-div">
+<!-- Kollegen 9 hinzufügen -->
+    <b>Kollege 9</b><br>
+    <input type="text" id="kollege9-name-input" name="kollege9-name-input" placeholder="Name"> <br>
+
+    <!-- Maximale Arbeitstage im Monat für Kollege 9 -->
+    <label for="kollege9-max-arbeitstage-input">Arbeitstage</label> 
+    <input type="number" id="kollege9-max-arbeitstage-input" name="kollege9-max-arbeitstage-input" min="0" max="31" value="31"> <br>
+    
+    <!-- Wunschfreie Tage & Schicht Abneigung -->
+    <label for="kollege9-wunschfrei-input">Wunschfrei</label> 
+    <input type="date" id="kollege9-wunschfrei-input" name="kollege9-wunschfrei-input" min="2026-01-01">  <br>
+
+    <label for="kollege9-schicht-praeferenz-input">Schichten &nbsp;</label> 
+    <input type="text" id="kollege9-schicht-praeferenz-input" name="kollege9-schicht-praeferenz-input" placeholder="" size="5"> <br>
+    
+    <button id="kollege9-hinzufuegen-btn">Aktualisieren</button> <br> 
+    <button type="button" onclick="kollege9_input_reset()">Reset</button><br><br>
+
+    <!-- Wunsch-Arbeitstage & Schicht -->
+    <label for="kollege9-wunscharbeiten-input">Wunsch-Arbeitstage🪴</label> <br>
+    <input type="date" id="kollege9-wunscharbeiten-input" name="kollege9-wunscharbeiten-input" min="2026-01-01"> 
+
+    <label for="kollege9-wunscharbeiten-schicht-input">Schicht</label>
+    <input type="number" id="kollege9-wunscharbeiten-schicht-input" name="kollege9-wunscharbeiten-schicht-input" min="1" max="3" value="0"> <br>
+
+    <button id="kollege9-wunscharbeiten-hinzufuegen-btn">Hinzufügen</button> <br>
+    <button type="button" onclick="kollege9_wunscharbeiten_input_reset()">Reset</button><br><br>
+</div>
+<div class="kollege-div">
+<!-- Kollege 0 hinzufügen -->
+    <b>Kollege 0</b><br>
+    <input type="text" id="kollege0-name-input" name="kollege0-name-input" placeholder="Name"> <br>
+
+    <!-- Maximale Arbeitstage im Monat für Kollege 0 -->
+    <label for="kollege0-max-arbeitstage-input">Arbeitstage</label> 
+    <input type="number" id="kollege0-max-arbeitstage-input" name="kollege0-max-arbeitstage-input" min="0" max="31" value="31"> <br>
+    
+    <!-- Wunschfreie Tage & Schicht Abneigung -->
+    <label for="kollege0-wunschfrei-input">Wunschfrei</label> 
+    <input type="date" id="kollege0-wunschfrei-input" name="kollege0-wunschfrei-input" min="2026-01-01">  <br>
+
+    <label for="kollege0-schicht-praeferenz-input">Schichten &nbsp;</label> 
+    <input type="text" id="kollege0-schicht-praeferenz-input" name="kollege0-schicht-praeferenz-input" placeholder="" size="5"> <br>
+    
+    <button id="kollege0-hinzufuegen-btn">Aktualisieren</button> <br> 
+    <button type="button" onclick="kollege0_input_reset()">Reset</button><br><br>
+
+    <!-- Wunsch-Arbeitstage & Schicht -->
+    <label for="kollege0-wunscharbeiten-input">Wunsch-Arbeitstage🪴</label> <br>
+    <input type="date" id="kollege0-wunscharbeiten-input" name="kollege0-wunscharbeiten-input" min="2026-01-01"> 
+
+    <label for="kollege0-wunscharbeiten-schicht-input">Schicht</label>
+    <input type="number" id="kollege0-wunscharbeiten-schicht-input" name="kollege0-wunscharbeiten-schicht-input" min="1" max="3" value="0"> <br>
+
+    <button id="kollege0-wunscharbeiten-hinzufuegen-btn">Hinzufügen</button> <br>
+    <button type="button" onclick="kollege0_wunscharbeiten_input_reset()">Reset</button><br><br>
+</div>
+</div>
+
+
+<!-- Impressum -->
+<footer style="max-width: 400px; margin: 3rem auto; padding: 2rem; background: #f5f7fa; border-radius: 10px; font-size: 0.9rem; color: #555;">
+    <details>
+        <summary style="cursor: pointer; color: #2a5d9f; font-weight: bold; font-size: 1rem;">
+            Impressum
+        </summary>
+        <div style="margin-top: 1rem;">
+            <p><strong>Angaben gemäß § 5 DDG:</strong></p>
+            <p>
+                Matthias Brehm<br>
+                Nordwestring 89<br>
+                90419 Nürnberg<br>
+                Deutschland
+            </p>
+            <p>
+                <strong>Kontakt:</strong><br>
+                E-Mail: <a href="mailto:kontakt@matthiasbrehm.de" style="color: #2a5d9f;">kontakt@matthiasbrehm.de</a>
+            </p>
+            <p>
+                <strong>Haftungsausschluss:</strong><br>
+                Diese Anwendung befindet sich in der Testphase. <br> Keine Haftung für Richtigkeit, Vollständigkeit oder<br>Aktualität der bereitgestellten Inhalte.
+            </p>
+            
+            <p>
+                <strong>Quellcode & Lizenz:</strong><br>
+                AssistPlan ist Open-Source-Software und wird unter der GNU Affero General Public License Version 3 (AGPL-3.0) veröffentlicht.
+                Der Quellcode und die vollständigen Lizenzbedingungen sind im GitHub-Repository von AssistPlan verfügbar: <br><br>
+                <a href="https://github.com/dubposse/assistplan">Quellcode auf GitHub · GNU AGPL-3.0</a>
+                
+            </p>
+        </div>
+    </details>
+</footer>
+ <script src="app.js"></script>   
+
+</body>
+</html>
