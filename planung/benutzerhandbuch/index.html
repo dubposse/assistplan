@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Einsatzplaner - Benutzerdokumentation</title>
+</head>
+<body>
+    <h1 style="background: linear-gradient(135deg, #0a4c85 0%, #1a6bb8 100%); color: #fff; padding: 16px 20px; border-radius: 8px; box-shadow: 0 4px 12px rgba(10,76,133,.3); margin: 20px 0; text-align: center; font-size: 1.8rem; letter-spacing: 0.02em;">AssistPlan - Benutzerdokumentation</h1>
+    <div style="background:#fff3cd; color:#856404; border:1px solid #ffeeba; border-radius:6px; padding:10px 14px; margin-bottom:16px; font-size:1rem;">
+        <strong>Hinweis:</strong> Diese Dokumentation ist noch nicht vollständig und wird weiterhin überarbeitet. Inhalte können sich ändern und werden laufend ergänzt.
+    </div>
+    <h2>Einführung</h2>
+    <p>Der Einsatzplaner ist ein einfaches, webbasiertes Tool zur Dienstplanung für kleine Pflegeteams. Ziel ist eine schnelle, übersichtliche und faire Erstellung von Dienstplänen – ohne komplexe Software oder aufwändige Excel-Tabellen.</p>
+
+    <p><strong>Halbautomatisch & flexibel:</strong> Das Tool schlägt Dienstpläne vor, basierend auf Arbeitszeiten, Wunschfrei, Schichtpräferenzen und freien Tagen. Sie können alle Vorschläge jederzeit anpassen – so bleibt die Planung effizient und individuell.</p>
+    <p><strong>Direktes Feedback:</strong> Probieren Sie verschiedene Schichtsysteme, Teamgrößen und freie Tage aus und sehen Sie sofort, wie sich die Verteilung verändert.</p>
+
+    <h2>Systemanforderungen</h2>
+    <p>Der Einsatzplaner läuft direkt im Webbrowser (empfohlen: Google Chrome) und benötigt keine Installation.</p>
+    <p><strong>Hinweis:</strong> Für eine optimale Nutzung empfiehlt sich ein Desktop-PC oder Laptop mit großem Monitor. Die Anwendung ist nicht für Smartphones oder kleine Laptops optimiert.</p>
+
+    <h2>Installationsanleitung</h2>
+    <p>Sie können den Einsatzplaner sofort im Browser nutzen – es ist keine Installation oder Registrierung erforderlich.</p> Webseite: www.assistplan.de
+
+    <p>Es werden keine personenbezogenen Daten gespeichert.</p>
+
+<h2>Bedienung, Funktionen und Workflows</h2>
+<p>Es gibt 3 Bereiche:</p> 
+<ul class="bereiche">
+    <li><a href="#formular-oben"><strong>Formular oben:</strong><br> Allgemeine Einstellungen</a></li>
+    <li><a href="#eingabemaske-unten"><strong>Eingabemaske unten:</strong><br> Bearbeitung der Kollegen</a></li>
+    <li><a href="#dienstplan-maske"><strong>Dienstplan-Maske:</strong><br> Flexibles anpassen der Dienste</a></li>
+</ul>
+<style>
+body {
+    width: 50vw;
+    min-width: 400px;
+    max-width: 800px;
+    margin: auto;
+}
+
+.bereiche {
+    list-style: none;
+    margin: 0 0 12px;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap:4px;
+    font-size:0.95rem;
+}
+.bereiche li {
+    background:#f6fbfe;
+    border:1px solid #b5d3e9;
+    border-radius:6px;
+    padding:6px 10px;
+}
+.bereiche a {
+    color: inherit;
+    text-decoration: none;
+    display: block;
+}
+@media (min-width:600px){
+    .bereiche {flex-direction:row;}
+    .bereiche li {flex:1;}
+}
+body {
+    width: 50vw;
+    min-width: 400px;
+    max-width: 800px;
+    margin: auto;
+}
+
+.bereiche {
+    list-style: none;
+    margin: 0 0 12px;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap:4px;
+    font-size:0.95rem;
+}
+.bereiche li {
+    background:#f6fbfe;
+    border:1px solid #b5d3e9;
+    border-radius:6px;
+    padding:6px 10px;
+}
+@media (min-width:600px){
+    .bereiche {flex-direction:row;}
+    .bereiche li {flex:1;}
+}
+
+</style>
+<h2 id="formular-oben" style="background: linear-gradient(135deg, #0a4c85 0%, #1a6bb8 100%); color: #fff; padding: 12px 16px; border-radius: 8px; box-shadow: 0 3px 8px rgba(10,76,133,.25); margin: 24px 0 16px;">
+    ⚙️ Formular oben: Allgemeine Einstellungen
+</h2>
+
+<figure class="form-snapshot">
+    <img src="Bilder/EinsatzplanerBildFormular1.png"
+             alt="Snapshot des oberen Formulars mit Feldern für Location, Monat, dienstfreie Tage und Schichtsystem"
+             loading="lazy">
+    <figcaption>Formular Oben</figcaption>
+</figure>
+<style>
+.form-snapshot {max-width:380px; width:100%; margin:12px 0;}
+.form-snapshot img {
+    display:block;
+    width:50%;
+    height:auto;
+    border:1px solid #b5d3e9;
+    border-radius:6px;
+    box-shadow:0 2px 6px rgba(0,0,0,.12);
+}
+@media (min-width:800px){
+    .form-snapshot {max-width:520px;}
+}
+</style>
+
+<div style="background:#d1ecf1; color:#0c5460; border:1px solid #bee5eb; border-radius:6px; padding:10px 14px; margin:12px 0; font-size:0.95rem;">
+    <strong>Hinweis zu den Allgemeinen Einstellungen:</strong><br><br>
+     Das Formular oben steuert die grundlegenden Parameter Ihrer Dienstplanung. Nehmen Sie hier alle wichtigen Einstellungen vor, bevor Sie mit der Kollegen-Bearbeitung beginnen.<br><br>
+
+    Der <strong>Monat</strong> ist die einzige zwingend erforderliche Angabe für die Planerstellung. Alle anderen Felder sind optional:<br><br>
+    
+    • <strong>Location:</strong> Optional – zur besseren Übersicht empfohlen<br>
+    • <strong>Dienstfreie Tage:</strong> Optional – nur bei geplanten Schließtagen<br>
+    • <strong>Schichtsystem:</strong> Optional – standardmäßig 3 Schichten<br>
+    • <strong>Auto-Verteilung-Start:</strong> Optional – standardmäßig bei Kollege 1<br><br>
+    
+    <strong>Warum nachträgliche Änderungen nicht nötig sind:</strong><br>
+    Location und Monat stehen bereits vor der Planung fest. Auch das Schichtsystem und dienstfreie Tage sind in der Regel im Vorfeld bekannt.<br><br>
+    
+    <strong>Empfohlener Workflow:</strong><br>
+    <!-- 
+        BENUTZERHINWEIS: Effiziente Planung
+        
+        Dieser Hinweis informiert Benutzer über den empfohlenen Workflow:
+        - Planung in einer Sitzung durchführen für maximale Effizienz
+        - Alle notwendigen Informationen vorher sammeln
+        - Plan nach Fertigstellung sofort exportieren/drucken
+        
+        HINWEIS ZUR DATENPERSISTENZ:
+        Der aktuelle Hinweis kommuniziert transparent, dass Daten beim Schließen verloren gehen.
+        
+        ALTERNATIVE FORMULIERUNGEN (falls User-Reaktion negativ):
+        1. Fokus auf Workflow statt Limitation:
+             "Für optimale Ergebnisse empfehlen wir, den Plan in einer Sitzung zu erstellen 
+             und anschließend zu exportieren."
+        
+        2. Technische Erklärung mit Lösung:
+             "Die App arbeitet browserbasiert ohne Server-Speicherung (Datenschutz). 
+             Bitte exportieren Sie Ihren fertigen Plan."
+        
+        3. Positiv formuliert:
+             "Schnelle Planung ohne Anmeldung - erstellen und direkt exportieren!"
+        
+        EMPFEHLUNG: Aktuelle Formulierung ist ehrlich und transparent. 
+        Bei negativem Feedback: Alternative 2 verwenden (erklärt WARUM + betont Datenschutz-Vorteil)
+    -->
+    Planen Sie den kommenden Monat, sobald alle relevanten Informationen vorliegen (Urlaubswünsche, Verfügbarkeiten, etc.). Generieren Sie den Dienstplan in einer Sitzung und drucken oder exportieren Sie ihn anschließend. Da die Daten beim Schließen des Browsers nicht gespeichert werden, ist eine vollständige Planung in einem Durchgang am effizientesten.<br><br>
+    
+    <strong>Hinweis für zukünftige Versionen:</strong><br>
+    In Zukunft wird eine Speicherfunktion implementiert, die nachträgliche Anpassungen ermöglicht – etwa bei kurzfristigen Ausfällen durch Krankheit oder unvorhergesehenen Änderungen während des laufenden Monats. Aktuell ist der Einsatzplaner für die Vorausplanung des kommenden Monats optimiert. <br><br>
+    
+    <strong>Tipp zur Auto-Verteilung-Start:</strong><br>
+    Überlegen Sie vor der Generierung, welcher Kollege am besten die erste Schicht im neuen Monat übernehmen sollte. Diese bewusste Entscheidung hilft, die Dienstverteilung nach rechtlichen Vorgaben, Ruhezeiten und Fairness-Aspekten optimal zu gestalten.
+</div>
+
+<h3>Schritt 1: Location (Standort) und Monat auswählen</h3>
+<p>Wählen Sie Ihren Standort (z.B. Pflegeeinrichtung, WG, ambulante Betreuung) und den gewünschten Monat aus, für den Sie den Dienstplan erstellen möchten.
+    <span class="loc-info-trigger" tabindex="0" aria-describedby="loc-info-popup" title="Beispiele anzeigen">ℹ</span>
+</p>
+
+<div id="loc-info-popup" class="loc-info-popup" role="tooltip">
+    <strong>Beispiele für Location:</strong>
+    <ul>
+        <li>Ambulante 1:1 Betreuung im 24-Stunden-Versorgungsmodell (3-Schichtsystem)</li>
+        <li>Ambulante Betreuung stundenweise (1–3 Schichten)</li>
+        <li>Tagespflege mit unterschiedlichem Schichtmodell</li>
+        <li>Pflege- und Betreuungseinrichtungen mit diversen Modellen</li>
+        <li>Betreutes Wohnen (kleine Hausgemeinschaft)</li>
+        <li>Ambulante Intensivpflege-WG (3-Schichtsystem)</li>
+        <li>Kleine Demenz-Wohngruppe</li>
+        <li>1:1 Kinderkrankenpflege / Intensivbetreuung</li>
+        <li>Persönliche Assistenz (Behindertenhilfe, 24h)</li>
+        <li>Stundenweise häusliche Betreuung (Seniorenbegleitung)</li>
+        <li>Kleine Tagespflege (Teilzeitteam)</li>
+        <li>Familienentlastender Dienst (planbare Einsätze)</li>
+        <li>Hospiz-Kleinteam / Palliativbegleitung</li>
+        <li>Mini-Team Hauskrankenpflege / mobile Pflege</li>
+    </ul>
+</div>
+<style>
+    .loc-info-trigger {
+        display: inline-flex;
+        width: 18px;
+        height: 18px;
+        font-size: 12px;
+        line-height: 16px;
+        align-items: center;
+        justify-content: center;
+        background:#0a4c85;
+        color:#fff;
+        border-radius:50%;
+        cursor:pointer;
+        margin-left:6px;
+        user-select:none;
+    }
+    .loc-info-trigger:focus {outline:2px solid #0a4c85;}
+    .loc-info-popup {
+        position: absolute;
+        max-width: 320px;
+        background: #fff;
+        border: 1px solid #b5d3e9;
+        padding: 10px 12px;
+        font-size: 0.8rem;
+        line-height: 1.2;
+        border-radius: 6px;
+        box-shadow: 0 4px 14px rgba(0,0,0,.15);
+        z-index: 100;
+        display: none;
+    }
+    .loc-info-popup ul {padding-left:18px; margin:4px 0 0;}
+    p:hover + .loc-info-popup,
+    p:focus-within + .loc-info-popup {
+        display: block;
+    }
+    @media (hover:none){
+        p:active + .loc-info-popup {display:block;}
+    }
+</style>
+<h3>Schritt 2: Freie Arbeitstage festlegen</h3>
+<p>Hier können Sie Tage eintragen, an denen keine Dienste geplant werden sollen – zum Beispiel bei geplanten Schließtagen, Fortbildungen, Team-Events, Urlaub des Klienten oder anderen Gründen ohne Dienstbetrieb. So berücksichtigt der Planer automatisch alle Besonderheiten Ihres Teams und Sie behalten die volle Kontrolle über freie Tage.</p>
+<h3>Schritt 3: Schichtsystem festlegen</h3>
+<p>Wählen Sie aus, wie viele Schichten pro Tag Ihr Dienstplan haben soll (1, 2 oder 3 Schichten).</p>
+<p><strong>Hinweis:</strong><br>
+Die genauen Uhrzeiten der Schichten spielen für den Einsatzplaner keine Rolle – Sie wählen einfach Schicht 1, 2 oder 3, unabhängig von deren Beginn oder Ende. Das macht die Planung besonders flexibel und anpassbar an Ihr Team.</p>
+<p>Der Einsatzplaner arbeitet unabhängig von Ihrer bestehenden Software (z.B. Zeiterfassung oder Lohnbuchhaltung). Sie können die fertigen Dienstpläne einfach exportieren oder in Ihr gewohntes System übernehmen – ganz ohne technische Hürden.</p>
+<p>So bleibt der Planer vielseitig einsetzbar – egal, wie Ihr Schichtmodell aussieht oder wie groß Ihr Team ist. In Zukunft werden noch weitere individuelle Einstellungen möglich sein.</p>
+<h3>Schritt 4: Auto-Verteilung-Start</h3>
+<p>Wählen Sie aus, welcher Kollege den ersten Dienst im neuen Monat übernehmen soll. Die automatische Dienstverteilung beginnt dann bei diesem Kollegen und verteilt die weiteren Dienste entsprechend auf das Team.</p>
+<h3>Schritt 5: Allgemeine Einstellungen übernehmen</h3>
+<p>Durch Klicken auf "Aktualisieren" werden alle vorgenommenen Änderungen übernommen und im Einsatzplan berücksichtigt.</p>
+<p class="button">AKTUALISIEREN</p>
+
+</style>
+<h2 id="eingabemaske-unten" style="background: linear-gradient(135deg, #0a4c85 0%, #1a6bb8 100%); color: #fff; padding: 12px 16px; border-radius: 8px; box-shadow: 0 3px 8px rgba(10,76,133,.25); margin: 24px 0 16px;">
+    ✏️ Eingabemaske unten: Bearbeitung der Kollegen
+</h2>
+<figure class="form-snapshot">
+    <img src="Bilder/EinsatzplanerBildEingabemaskeUnten.png"
+             alt="Snapshot des oberen Formulars mit Feldern für Location, Monat, dienstfreie Tage und Schichtsystem"
+             loading="lazy">
+    <figcaption>Kollege 1 Formular</figcaption>
+</figure>
+<style>
+.form-snapshot {max-width:380px; width:70%; margin:12px 0;}
+.form-snapshot img {
+    display:block;
+    width:50%;
+    height:auto;
+    border:1px solid #b5d3e9;
+    border-radius:6px;
+    box-shadow:0 2px 6px rgba(0,0,0,.12);
+}
+@media (min-width:800px){
+    .form-snapshot {max-width:520px;}
+}
+</style>
+
+<h3>Schritt 1: Name eingeben</h3>
+
+<h3>Schritt 2: Arbeitstage - Maximale Anzahl festlegen</h3>
+<p>Geben Sie hier an, an wie vielen Tagen im Monat dieser Kollege maximal eingeteilt werden soll. Diese Angabe ist wichtig für die automatische Dienstverteilung.</p>
+<h3>Schritt 3: Wunschfreie Tage festlegen</h3>
+<p>Hier können Sie Tage markieren, an denen dieser Kollege nicht arbeiten möchte oder kann – zum Beispiel für Urlaub, private Termine oder andere Verpflichtungen.</p>
+<p><strong>So funktioniert's:</strong></p>
+<ol style="margin:8px 0; padding-left:20px; line-height:1.6;">
+    <li>Kalender-Symbol anklicken</li>
+    <li>Gewünschten Tag im Kalender auswählen</li>
+    <li>Auf "AKTUALISIEREN" klicken</li>
+    <li>Bei Bedarf wiederholen für weitere Tage</li>
+</ol>
+<p>Die automatische Dienstverteilung berücksichtigt diese Wunschfrei-Tage und plant den Kollegen an diesen Tagen nicht ein.</p>
+<h3>Schritt 4: Schichtpräferenz festlegen</h3>
+<div style="background:#d1ecf1; color:#0c5460; border:1px solid #bee5eb; border-radius:6px; padding:10px 14px; margin:12px 0; font-size:0.95rem;">
+    <strong>Wichtiger Hinweis:</strong><br><br>
+    Die Schichtpräferenz sollte zu Beginn der Planung sorgfältig festgelegt werden, da sie die Grundlage für die automatische Dienstverteilung bildet. Änderungen sind später nur durch einen kompletten Reset möglich – planen Sie daher vorher gemeinsam mit Ihrem Team, wer in welchen Schichten eingesetzt werden kann.
+</div>
+<p>Legen Sie hier fest, in welchen Schichten dieser Kollege arbeiten kann oder möchte. Die automatische Dienstverteilung berücksichtigt diese Einstellung und teilt den Kollegen nur in den gewählten Schichten ein.</p>
+
+<p><strong>So geben Sie die Schichtpräferenz ein:</strong></p>
+<ul style="list-style:none; padding-left:0; margin:8px 0; line-height:1.8;">
+    <li><strong>1</strong> → Kollege arbeitet nur in Schicht 1</li>
+    <li><strong>2</strong> → Kollege arbeitet nur in Schicht 2</li>
+    <li><strong>3</strong> → Kollege arbeitet nur in Schicht 3</li>
+    <li><strong>1+2</strong> → Kollege arbeitet in Schicht 1 und 2</li>
+    <li><strong>2+3</strong> → Kollege arbeitet in Schicht 2 und 3</li>
+    <li><strong>1+3</strong> → Kollege arbeitet in Schicht 1 und 3</li>
+    <li><strong>1+2+3</strong> → Kollege arbeitet in allen Schichten</li>
+</ul>
+
+<p><strong>Beispiel:</strong> Wenn ein Kollege nur in der Schicht 1 und 2 arbeiten möchte, geben Sie <strong>1+2</strong> ein.</p>
+<p><strong>Hinweis:</strong><br>
+Die Schichtnummern (1, 2, 3) sind lediglich Platzhalter – die tatsächlichen Arbeitszeiten (z.B. 06:00–14:00 Uhr) bestimmen Sie selbst und können diese flexibel an Ihr Team anpassen.</p>
+
+<p><strong>Beispiel zur Verdeutlichung:</strong><br>
+In Ihrem Team könnte Schicht 1 beispielsweise von 06:00–14:00 Uhr laufen, Schicht 2 von 14:00–22:00 Uhr und Schicht 3 von 22:00–06:00 Uhr. Wenn ein Kollege nur vormittags und nachmittags arbeiten kann, geben Sie einfach <strong>1+2</strong> ein – unabhängig davon, wie Ihre konkreten Uhrzeiten lauten. Der Einsatzplaner arbeitet nur mit den Nummern, nicht mit festen Zeiten.</p>
+<p>Nach Eingabe aller Daten für diesen Kollegen klicken Sie auf "Aktualisieren", um die Änderungen zu speichern.</p>
+<p class="button">AKTUALISIEREN</p>
+
+<h3>Schritt 5: Wunsch-Arbeitstage festlegen</h3>
+<p>Hier können Sie Tage markieren, an denen dieser Kollege besonders gerne arbeiten möchte. Diese Wunsch-Arbeitstage werden bei der automatischen Dienstverteilung bevorzugt berücksichtigt.</p>
+<p><strong>So funktioniert's:</strong></p>
+<ol style="margin:8px 0; padding-left:20px; line-height:1.6;">
+    <li>Kalender-Symbol anklicken</li>
+    <li>Gewünschten Tag im Kalender auswählen</li>
+    <li>Gewünschte Schicht für diesen Tag auswählen (z.B. Schicht 1, 2 oder 3)</li>
+    <li>Auf "Hinzufügen" klicken</li>
+<p class="button">Hinzufügen</p>
+
+    <li>Bei Bedarf wiederholen für weitere Tage</li>
+</ol>
+<p>Die automatische Dienstverteilung versucht, den Kollegen an diesen Wunsch-Arbeitstagen einzuplanen, sofern dies mit den anderen Einstellungen vereinbar ist.</p>
+
+<h3>Schritt 6: Weitere Kollegen hinzufügen</h3>
+<p>Wiederholen Sie die Schritte 1–5 für jeden weiteren Kollegen in Ihrem Team.</p>
+
+<h3>Schritt 7: Angaben überprüfen</h3>
+<p>Bevor Sie den Einsatzplan generieren, überprüfen Sie bitte alle eingegebenen Daten. Es werden alle Wunschfrei-Tage und Wunsch-Arbeitstage zur Kontrolle angezeigt.</p>
+<ul style="margin:8px 0; padding-left:20px; line-height:1.6;">
+ 
+</ul>
+
+<div style="background:#d1ecf1; color:#0c5460; border:1px solid #bee5eb; border-radius:6px; padding:10px 14px; margin:12px 0; font-size:0.95rem;">
+    <strong>Wichtiger Hinweis zu den Pflichtangaben:</strong><br><br>
+    Die <strong>Schichtpräferenz</strong> ist die einzige zwingend erforderliche Angabe für die automatische Verteilung. Alle anderen Felder sind optional:<br><br>
+    
+    • <strong>Name:</strong> Optional – kann leer bleiben<br>
+    • <strong>Arbeitstage:</strong> Optional – steht standardmäßig auf 31 Tage<br>
+    • <strong>Wunschfrei-Tage:</strong> Optional – nur bei Bedarf angeben<br>
+    • <strong>Wunsch-Arbeitstage:</strong> Optional – nur bei Bedarf angeben<br><br>
+    
+    <strong>Beispiele:</strong><br>
+    • Eine Aushilfe kann mit nur 5 Arbeitstagen und einer Schichtpräferenz automatisch verteilt werden<br>
+    • Kombination aus wenigen Arbeitstagen + einzelnen Wunschtagen ist möglich<br>
+    • Soll ein Kollege <strong>nicht</strong> in die automatische Verteilung, lassen Sie das Feld "Schichtpräferenz" einfach leer – Wunsch-Arbeitstage können trotzdem vergeben werden
+</div>
+
+<p>Sobald alle Angaben korrekt sind, können Sie mit dem nächsten Schritt fortfahren.</p>
+
+<h3>Schritt 8: Dienstplan generieren</h3>
+<p>Klicken Sie auf "Einsatzplan generieren", um die automatische Dienstverteilung zu starten. Der Einsatzplaner erstellt einen Dienstplan basierend auf allen eingegebenen Daten und Präferenzen.</p>
+<p class="button">Einsatzplan generieren</p>
+
+<h2 id="dienstplan-maske" style="background: linear-gradient(135deg, #0a4c85 0%, #1a6bb8 100%); color: #fff; padding: 12px 16px; border-radius: 8px; box-shadow: 0 3px 8px rgba(10,76,133,.25); margin: 24px 0 16px;">
+    📋 Dienstplan-Maske: Flexibles Anpassen der Dienste
+</h2>
+
+<p>Nach der Generierung sehen Sie den fertigen Dienstplan sofort in der Dienstplan-Maske. Falls nötig, können Sie einzelne Dienste noch per Drag & Drop verschieben – so haben Sie maximale Flexibilität bei minimaler Planungszeit.</p>
+
+<p><strong>Ihr Vorteil:</strong> Was früher Stunden gedauert hat, erledigen Sie jetzt in wenigen Minuten. Der Planer berücksichtigt automatisch alle Wünsche, Präferenzen und Vorgaben – Sie müssen nur noch prüfen und bei Bedarf feintunen.</p> <br>
+
+<h3>Dienstplan drucken oder exportieren</h3>
+<p>Sobald der Dienstplan Ihren Vorstellungen entspricht, können Sie ihn exportieren oder direkt ausdrucken.</p>
+
+<p><strong>Drucken:</strong><br>
+Klicken Sie auf "Drucken", um den Dienstplan direkt über Ihren Browser auszudrucken. Der Plan wird automatisch druckoptimiert dargestellt.</p>
+
+
+<p><strong>Exportieren:</strong><br>
+Exportieren Sie den Plan in ein Format Ihrer Wahl – ideal zum Archivieren, Versenden oder zur Übernahme in bestehende Systeme wie Zeiterfassung oder Lohnbuchhaltung.</p>
+<p class="button">Export</p> <br><br><br>
+
+<div style="background:#fff3cd; color:#856404; border:1px solid #ffeeba; border-radius:6px; padding:10px 14px; margin:16px 0; font-size:0.95rem;">
+    <strong>Hinweis zur Entwicklung:</strong><br><br>
+    Die <strong>Exportfunktionen</strong> befinden sich derzeit noch in der Entwicklung und sind nicht vollständig implementiert.<br><br>
+    Der Einsatzplaner wird kontinuierlich weiterentwickelt – weitere Funktionen werden in Zukunft ergänzt und bestehende Features optimiert.
+</div> <br>
+
+<h2>Impressum</h2>
+<p><strong>Angaben gemäß § 5 TMG:</strong></p>
+<p>
+    Matthias Brehm<br>
+    Nordwestring 89<br>
+    90419 Nürnberg<br>
+</p>
+<p>
+    <strong>Kontakt:</strong><br>
+    E-Mail: matthiasbrehm1@gmx.de<br>
+  
+</p>
+<p>
+    <strong>Haftungsausschluss:</strong><br>
+    Die Inhalte dieser Seite wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen.
+</p>
+
+<style>
+    .button {
+        cursor: pointer;
+    -webkit-appearance: none;
+    appearance: none;
+    font: 500 0.85rem/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    letter-spacing: .015em;
+    padding: 6px 14px;
+    border: 1px solid #b5d3e9;
+    background: linear-gradient(180deg,#f6fbfe 0%,#eef5fa 100%);
+    color: #0a4c85;
+    border-radius: 6px;
+    box-shadow: 0 1px 2px rgba(0,0,0,.08);
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    text-decoration: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    transition: background .15s ease, box-shadow .15s ease, transform .15s ease;
+    }
+
+    .button:hover {background-color: #3e8e41}
+
+    .button:active {
+        background-color: #3e8e41;
+        box-shadow: 0 5px #666;
+        transform: translateY(4px);
+    }
+</style>
+    
+</body>
+</html>

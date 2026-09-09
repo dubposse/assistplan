@@ -1,0 +1,2543 @@
+/* =========================================================
+   AssistPlan – Hi-Tech / Electric UI
+   Refactored visual layer
+   - no external fonts
+   - existing IDs/classes preserved
+   - no JavaScript/DOM contract changes
+   ========================================================= */
+
+:root {
+    --ap-bg: #07111f;
+    --ap-bg-2: #0b1728;
+    --ap-panel: #f8fafc;
+    --ap-panel-strong: #ffffff;
+    --ap-panel-muted: #eef3f8;
+    --ap-text: #0f172a;
+    --ap-text-muted: #5f6f82;
+    --ap-primary: #2563eb;
+    --ap-primary-hover: #1d4ed8;
+    --ap-electric: #22d3ee;
+    --ap-electric-soft: rgba(34, 211, 238, 0.14);
+    --ap-border: #cbd8e6;
+    --ap-border-tech: rgba(34, 211, 238, 0.34);
+    --ap-danger: #dc2626;
+    --ap-success: #15803d;
+    --ap-radius: 9px;
+    --ap-radius-lg: 12px;
+    --ap-shadow: 0 12px 32px rgba(0, 0, 0, 0.22);
+    --ap-shadow-soft: 0 6px 18px rgba(0, 0, 0, 0.12);
+    --ap-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    min-height: 100%;
+    background: var(--ap-bg);
+}
+
+body {
+    min-height: 100vh;
+    margin: 0;
+    padding: 1rem;
+    background:
+        radial-gradient(circle at 18% 0%, rgba(37, 99, 235, 0.16), transparent 32rem),
+        radial-gradient(circle at 88% 12%, rgba(34, 211, 238, 0.09), transparent 28rem),
+        linear-gradient(145deg, var(--ap-bg) 0%, var(--ap-bg-2) 100%);
+    background-attachment: fixed;
+    font-family: var(--ap-font);
+    color: var(--ap-text);
+}
+
+.ep-cal-main {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+#hauptbereich {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+/* ---------- Typography ---------- */
+
+h1 {
+    margin: 0 0 10px;
+    color: #f8fafc;
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    text-shadow: 0 0 24px rgba(34, 211, 238, 0.16);
+}
+
+#app-infos {
+    margin: 1px 0 8px;
+    color: #a9b8ca;
+    font-size: 0.95rem;
+    line-height: 1.45;
+}
+
+/* ---------- Main surfaces ---------- */
+
+#monat-details-input-container,
+#kollegen-1bis0-container,
+.kollege-div,
+#mvp-hinweis {
+    background: linear-gradient(180deg, var(--ap-panel-strong) 0%, var(--ap-panel) 100%);
+    border: 1px solid var(--ap-border-tech);
+    border-radius: var(--ap-radius-lg);
+    box-shadow: var(--ap-shadow);
+}
+
+#monat-details-input-container {
+    position: relative;
+    width: 320px;
+    max-width: 100%;
+    margin-bottom: 16px;
+    padding: 16px;
+    transition: border-color 0.16s ease, box-shadow 0.16s ease;
+}
+
+#monat-details-input-container:focus-within {
+    border-color: rgba(34, 211, 238, 0.58);
+    box-shadow:
+        var(--ap-shadow),
+        0 0 0 1px rgba(34, 211, 238, 0.12),
+        0 0 24px rgba(34, 211, 238, 0.08);
+}
+
+#monat-details-ausgabe {
+    display: none; 
+    flex: 1;
+    flex-direction: column;
+    gap: 0.7rem;
+    min-width: 220px;
+    max-height: 60px;
+    margin-bottom: 14px;
+    padding: 12px 14px;
+    overflow-y: auto;
+    background: #101922;
+    border: 1px solid var(--ap-border);
+    border-top: 1px solid var(--ap-border);
+    border-radius: var(--ap-radius-lg);
+    box-shadow: var(--ap-shadow);
+    color: var(--ap-text);
+    font-family: var(--ap-font);
+    font-size: 0.96rem;
+    line-height: 1.45;
+    scrollbar-color: #7b8da3 #e7edf4;
+    scrollbar-width: thin;
+}
+
+#monat-details-ausgabe,
+#monat-details-ausgabe * {
+    font-size: 0.7rem !important;
+}
+
+#monat-details-ausgabe h3,
+#monat-details-ausgabe h4 {
+    margin: 0 0 0.35rem;
+    color: #1557b0;
+    font-size: 1.08rem;
+    font-weight: 650;
+    letter-spacing: -0.01em;
+}
+
+#monat-details-ausgabe ul,
+#monat-details-ausgabe ol {
+    margin: 0 0 0.35rem 1.1rem;
+    padding: 0;
+    font-size: 0.95rem;
+}
+
+#monat-details-ausgabe li {
+    margin-bottom: 0.18rem;
+    padding-left: 0.15em;
+}
+
+#monat-details-ausgabe p {
+    margin: 0 0 0.35rem;
+    font-size: 0.96rem;
+}
+
+#monat-details-kollegen-spiegel {
+    width: 100%;
+    max-width: 100%;
+    max-height: 420px;
+    margin-bottom: 14px;
+    padding: 10px 12px;
+    overflow-y: auto;
+    background: #101922;
+    border: 1px solid var(--ap-border);
+    border-radius: var(--ap-radius-lg);
+    color: var(--ap-text);
+    font-family: var(--ap-font);
+    font-size: 0.7rem;
+}
+
+#monat-details-kollegen-spiegel[hidden] {
+    display: none;
+}
+
+
+.monat-details-kollegen-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px 10px;
+}
+
+.monat-details-kollegen-abschnitt {
+    min-width: 0;
+    padding: 7px 8px;
+    background: #0d151d;
+    border: 1px solid #263747;
+    border-radius: 6px;
+}
+
+.monat-details-kollegen-abschnitt strong {
+    display: block;
+    margin-bottom: 3px;
+    color: #b9d0d8;
+}
+
+.monat-details-kollegen-abschnitt span {
+    color: #81909f;
+}
+
+@media (max-width: 600px) {
+    #monat-details-kollegen-spiegel {
+        max-height: 34vh;
+    }
+
+    .monat-details-kollegen-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+#kollegen-1bis0-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 12px;
+    transition: border-color 0.16s ease, box-shadow 0.16s ease;
+}
+
+#kollegen-1bis0-container .kollege {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 8px 10px;
+    background: #f1f6fb;
+    border: 1px solid #d6e1ec;
+    border-radius: 8px;
+    color: #1557b0;
+    font-weight: 600;
+}
+
+.kollege-div {
+    margin-left: -10px;
+    padding: 4px;
+    box-shadow: var(--ap-shadow-soft);
+    transition: border-color 0.16s ease, box-shadow 0.16s ease, transform 0.12s ease;
+}
+
+.kollege-div:focus-within {
+    border-color: rgba(34, 211, 238, 0.6);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.16), 0 0 18px rgba(34, 211, 238, 0.08);
+}
+
+/* ---------- Form controls ---------- */
+
+select,
+input[type="date"],
+input[type="number"],
+#monat-input,
+#unbetreuter-tag-input,
+#start-kollege-input,
+#kollege1-schicht-praeferenz-input,
+#kollege2-schicht-praeferenz-input,
+#kollege3-schicht-praeferenz-input,
+#kollege4-schicht-praeferenz-input,
+#kollege5-schicht-praeferenz-input,
+#kollege6-schicht-praeferenz-input,
+#kollege7-schicht-praeferenz-input,
+#kollege8-schicht-praeferenz-input,
+#kollege9-schicht-praeferenz-input,
+#kollege0-schicht-praeferenz-input,
+#kollege1-name-input,
+#kollege2-name-input,
+#kollege3-name-input,
+#kollege4-name-input,
+#kollege5-name-input,
+#kollege6-name-input,
+#kollege7-name-input,
+#kollege8-name-input,
+#kollege9-name-input,
+#kollege0-name-input,
+#location-name-input,
+#kollege1-wunscharbeiten-schicht-input,
+#kollege2-wunscharbeiten-schicht-input,
+#kollege3-wunscharbeiten-schicht-input,
+#kollege4-wunscharbeiten-schicht-input,
+#kollege5-wunscharbeiten-schicht-input,
+#kollege6-wunscharbeiten-schicht-input,
+#kollege7-wunscharbeiten-schicht-input,
+#kollege8-wunscharbeiten-schicht-input,
+#kollege9-wunscharbeiten-schicht-input,
+#kollege0-wunscharbeiten-schicht-input {
+    font-family: var(--ap-font);
+    color: var(--ap-text);
+    background: #f8fafc;
+    border: 1px solid var(--ap-border);
+    border-radius: 7px;
+    outline: none;
+    box-shadow: inset 0 1px 1px rgba(15, 23, 42, 0.025);
+    transition:
+        border-color 0.15s ease,
+        box-shadow 0.15s ease,
+        background 0.15s ease;
+}
+
+select {
+    padding: 4px 1.1rem 4px 0.95rem;
+    color: #164e87;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+#start-kollege-input {
+    width: 40px;
+    margin-bottom: 10px;
+    padding: 1px 0.95rem;
+}
+
+input[type="date"],
+#monat-input,
+#unbetreuter-tag-input {
+    width: 1rem;
+    padding: 1px 0.95rem;
+}
+
+input[type="number"] {
+    width: 2.75rem;
+    padding: 1px 0.95rem;
+}
+
+#kollege1-schicht-praeferenz-input,
+#kollege2-schicht-praeferenz-input,
+#kollege3-schicht-praeferenz-input,
+#kollege4-schicht-praeferenz-input,
+#kollege5-schicht-praeferenz-input,
+#kollege6-schicht-praeferenz-input,
+#kollege7-schicht-praeferenz-input,
+#kollege8-schicht-praeferenz-input,
+#kollege9-schicht-praeferenz-input,
+#kollege0-schicht-praeferenz-input {
+    width: 58px;
+    padding: 1px 0.55rem;
+    font-size: 0.95rem;
+}
+
+#kollege1-name-input,
+#kollege2-name-input,
+#kollege3-name-input,
+#kollege4-name-input,
+#kollege5-name-input,
+#kollege6-name-input,
+#kollege7-name-input,
+#kollege8-name-input,
+#kollege9-name-input,
+#kollege0-name-input,
+#location-name-input {
+    width: 157px;
+    margin: 2px 0;
+    font-size: 1.25rem;
+}
+
+#kollege1-wunscharbeiten-schicht-input,
+#kollege2-wunscharbeiten-schicht-input,
+#kollege3-wunscharbeiten-schicht-input,
+#kollege4-wunscharbeiten-schicht-input,
+#kollege5-wunscharbeiten-schicht-input,
+#kollege6-wunscharbeiten-schicht-input,
+#kollege7-wunscharbeiten-schicht-input,
+#kollege8-wunscharbeiten-schicht-input,
+#kollege9-wunscharbeiten-schicht-input,
+#kollege0-wunscharbeiten-schicht-input {
+    width: 1.5rem;
+    padding: 1px 0.95rem;
+}
+
+select:focus,
+input[type="date"]:focus,
+input[type="number"]:focus,
+#monat-input:focus,
+#unbetreuter-tag-input:focus,
+#start-kollege-input:focus,
+#kollege1-schicht-praeferenz-input:focus,
+#kollege2-schicht-praeferenz-input:focus,
+#kollege3-schicht-praeferenz-input:focus,
+#kollege4-schicht-praeferenz-input:focus,
+#kollege5-schicht-praeferenz-input:focus,
+#kollege6-schicht-praeferenz-input:focus,
+#kollege7-schicht-praeferenz-input:focus,
+#kollege8-schicht-praeferenz-input:focus,
+#kollege9-schicht-praeferenz-input:focus,
+#kollege0-schicht-praeferenz-input:focus,
+#kollege1-name-input:focus,
+#kollege2-name-input:focus,
+#kollege3-name-input:focus,
+#kollege4-name-input:focus,
+#kollege5-name-input:focus,
+#kollege6-name-input:focus,
+#kollege7-name-input:focus,
+#kollege8-name-input:focus,
+#kollege9-name-input:focus,
+#kollege0-name-input:focus,
+#location-name-input:focus,
+#kollege1-wunscharbeiten-schicht-input:focus,
+#kollege2-wunscharbeiten-schicht-input:focus,
+#kollege3-wunscharbeiten-schicht-input:focus,
+#kollege4-wunscharbeiten-schicht-input:focus,
+#kollege5-wunscharbeiten-schicht-input:focus,
+#kollege6-wunscharbeiten-schicht-input:focus,
+#kollege7-wunscharbeiten-schicht-input:focus,
+#kollege8-wunscharbeiten-schicht-input:focus,
+#kollege9-wunscharbeiten-schicht-input:focus,
+#kollege0-wunscharbeiten-schicht-input:focus {
+    background: #ffffff;
+    border-color: var(--ap-electric);
+    box-shadow:
+        0 0 0 3px var(--ap-electric-soft),
+        0 0 14px rgba(34, 211, 238, 0.08);
+}
+
+/* ---------- Primary action ---------- */
+
+#generate-einsatzplan-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 165px;
+    margin-top: 8px;
+    padding: 6px 18px;
+    overflow: hidden;
+    color: #ffffff;
+    background: linear-gradient(105deg, #2563eb 0%, #1476d4 72%, #0891b2 100%);
+    border: 1px solid rgba(103, 232, 249, 0.42);
+    border-radius: 8px;
+    outline: none;
+    box-shadow:
+        0 8px 22px rgba(37, 99, 235, 0.24),
+        0 0 18px rgba(34, 211, 238, 0.10);
+    font: 650 1.02rem/1.2 var(--ap-font);
+    letter-spacing: 0.015em;
+    cursor: pointer;
+    transition:
+        background 0.16s ease,
+        border-color 0.16s ease,
+        box-shadow 0.16s ease,
+        transform 0.12s ease;
+}
+
+#generate-einsatzplan-btn::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -65%;
+    width: 45%;
+    height: 100%;
+    background: linear-gradient(110deg, transparent, rgba(255,255,255,0.24), transparent);
+    transform: skewX(-20deg);
+    pointer-events: none;
+    transition: left 0.42s ease;
+}
+
+#generate-einsatzplan-btn:hover::after,
+#generate-einsatzplan-btn:focus-visible::after {
+    left: 120%;
+}
+
+#generate-einsatzplan-btn:hover,
+#generate-einsatzplan-btn:focus-visible {
+    background: linear-gradient(105deg, #1d4ed8 0%, #0e7490 100%);
+    border-color: rgba(103, 232, 249, 0.72);
+    box-shadow:
+        0 10px 28px rgba(37, 99, 235, 0.30),
+        0 0 22px rgba(34, 211, 238, 0.15);
+    transform: translateY(-1px);
+}
+
+#generate-einsatzplan-btn:active {
+    transform: translateY(1px) scale(0.985);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.22);
+}
+
+#generate-einsatzplan-btn:disabled {
+    opacity: 0.5;
+    color: #8090a3;
+    background: #dbe4ee;
+    border-color: #cbd5e1;
+    box-shadow: none;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* ---------- Secondary / utility buttons ---------- */
+
+#kollege1-hinzufuegen-btn,
+#kollege2-hinzufuegen-btn,
+#kollege3-hinzufuegen-btn,
+#kollege4-hinzufuegen-btn,
+#kollege5-hinzufuegen-btn,
+#kollege6-hinzufuegen-btn,
+#kollege7-hinzufuegen-btn,
+#kollege8-hinzufuegen-btn,
+#kollege9-hinzufuegen-btn,
+#kollege0-hinzufuegen-btn,
+#kollege1-wunscharbeiten-hinzufuegen-btn,
+#kollege2-wunscharbeiten-hinzufuegen-btn,
+#kollege3-wunscharbeiten-hinzufuegen-btn,
+#kollege4-wunscharbeiten-hinzufuegen-btn,
+#kollege5-wunscharbeiten-hinzufuegen-btn,
+#kollege6-wunscharbeiten-hinzufuegen-btn,
+#kollege7-wunscharbeiten-hinzufuegen-btn,
+#kollege8-wunscharbeiten-hinzufuegen-btn,
+#kollege9-wunscharbeiten-hinzufuegen-btn,
+#kollege0-wunscharbeiten-hinzufuegen-btn,
+#zeige-monat-details-btn,
+button[type="button"] {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    cursor: pointer;
+    -webkit-appearance: none;
+    appearance: none;
+    padding: 6px 14px;
+    color: #164e87;
+    background: linear-gradient(180deg, #ffffff 0%, #edf3f8 100%);
+    border: 1px solid #b9c9d9;
+    border-radius: 7px;
+    box-shadow: 0 2px 5px rgba(15, 23, 42, 0.08);
+    font: 550 0.85rem/1.2 var(--ap-font);
+    letter-spacing: 0.01em;
+    text-decoration: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    transition:
+        background 0.15s ease,
+        color 0.15s ease,
+        border-color 0.15s ease,
+        box-shadow 0.15s ease,
+        transform 0.12s ease;
+}
+
+#kollege1-hinzufuegen-btn,
+#kollege2-hinzufuegen-btn,
+#kollege3-hinzufuegen-btn,
+#kollege4-hinzufuegen-btn,
+#kollege5-hinzufuegen-btn,
+#kollege6-hinzufuegen-btn,
+#kollege7-hinzufuegen-btn,
+#kollege8-hinzufuegen-btn,
+#kollege9-hinzufuegen-btn,
+#kollege0-hinzufuegen-btn,
+#kollege1-wunscharbeiten-hinzufuegen-btn,
+#kollege2-wunscharbeiten-hinzufuegen-btn,
+#kollege3-wunscharbeiten-hinzufuegen-btn,
+#kollege4-wunscharbeiten-hinzufuegen-btn,
+#kollege5-wunscharbeiten-hinzufuegen-btn,
+#kollege6-wunscharbeiten-hinzufuegen-btn,
+#kollege7-wunscharbeiten-hinzufuegen-btn,
+#kollege8-wunscharbeiten-hinzufuegen-btn,
+#kollege9-wunscharbeiten-hinzufuegen-btn,
+#kollege0-wunscharbeiten-hinzufuegen-btn,
+#zeige-monat-details-btn {
+    width: 165px;
+}
+
+button[type="button"] {
+    width: 65px;
+}
+
+#zeige-monat-details-btn {
+    margin-top: 2px;
+}
+
+#kollege1-hinzufuegen-btn:hover,
+#kollege2-hinzufuegen-btn:hover,
+#kollege3-hinzufuegen-btn:hover,
+#kollege4-hinzufuegen-btn:hover,
+#kollege5-hinzufuegen-btn:hover,
+#kollege6-hinzufuegen-btn:hover,
+#kollege7-hinzufuegen-btn:hover,
+#kollege8-hinzufuegen-btn:hover,
+#kollege9-hinzufuegen-btn:hover,
+#kollege0-hinzufuegen-btn:hover,
+#kollege1-wunscharbeiten-hinzufuegen-btn:hover,
+#kollege2-wunscharbeiten-hinzufuegen-btn:hover,
+#kollege3-wunscharbeiten-hinzufuegen-btn:hover,
+#kollege4-wunscharbeiten-hinzufuegen-btn:hover,
+#kollege5-wunscharbeiten-hinzufuegen-btn:hover,
+#kollege6-wunscharbeiten-hinzufuegen-btn:hover,
+#kollege7-wunscharbeiten-hinzufuegen-btn:hover,
+#kollege8-wunscharbeiten-hinzufuegen-btn:hover,
+#kollege9-wunscharbeiten-hinzufuegen-btn:hover,
+#kollege0-wunscharbeiten-hinzufuegen-btn:hover,
+#zeige-monat-details-btn:hover,
+button[type="button"]:hover {
+    color: #0f4f83;
+    background: #eefbff;
+    border-color: #67d8e8;
+    box-shadow:
+        0 0 0 2px rgba(34, 211, 238, 0.10),
+        0 5px 14px rgba(15, 23, 42, 0.10);
+    transform: translateY(-1px);
+}
+
+#kollege1-hinzufuegen-btn:active,
+#kollege2-hinzufuegen-btn:active,
+#kollege3-hinzufuegen-btn:active,
+#kollege4-hinzufuegen-btn:active,
+#kollege5-hinzufuegen-btn:active,
+#kollege6-hinzufuegen-btn:active,
+#kollege7-hinzufuegen-btn:active,
+#kollege8-hinzufuegen-btn:active,
+#kollege9-hinzufuegen-btn:active,
+#kollege0-hinzufuegen-btn:active,
+#kollege1-wunscharbeiten-hinzufuegen-btn:active,
+#kollege2-wunscharbeiten-hinzufuegen-btn:active,
+#kollege3-wunscharbeiten-hinzufuegen-btn:active,
+#kollege4-wunscharbeiten-hinzufuegen-btn:active,
+#kollege5-wunscharbeiten-hinzufuegen-btn:active,
+#kollege6-wunscharbeiten-hinzufuegen-btn:active,
+#kollege7-wunscharbeiten-hinzufuegen-btn:active,
+#kollege8-wunscharbeiten-hinzufuegen-btn:active,
+#kollege9-wunscharbeiten-hinzufuegen-btn:active,
+#kollege0-wunscharbeiten-hinzufuegen-btn:active,
+#zeige-monat-details-btn:active,
+button[type="button"]:active {
+    background: #dff8fc;
+    border-color: var(--ap-electric);
+    transform: translateY(1px);
+    box-shadow: 0 2px 6px rgba(15, 23, 42, 0.10);
+}
+
+#kollege1-hinzufuegen-btn:focus-visible,
+#kollege2-hinzufuegen-btn:focus-visible,
+#kollege3-hinzufuegen-btn:focus-visible,
+#kollege4-hinzufuegen-btn:focus-visible,
+#kollege5-hinzufuegen-btn:focus-visible,
+#kollege6-hinzufuegen-btn:focus-visible,
+#kollege7-hinzufuegen-btn:focus-visible,
+#kollege8-hinzufuegen-btn:focus-visible,
+#kollege9-hinzufuegen-btn:focus-visible,
+#kollege0-hinzufuegen-btn:focus-visible,
+#kollege1-wunscharbeiten-hinzufuegen-btn:focus-visible,
+#kollege2-wunscharbeiten-hinzufuegen-btn:focus-visible,
+#kollege3-wunscharbeiten-hinzufuegen-btn:focus-visible,
+#kollege4-wunscharbeiten-hinzufuegen-btn:focus-visible,
+#kollege5-wunscharbeiten-hinzufuegen-btn:focus-visible,
+#kollege6-wunscharbeiten-hinzufuegen-btn:focus-visible,
+#kollege7-wunscharbeiten-hinzufuegen-btn:focus-visible,
+#kollege8-wunscharbeiten-hinzufuegen-btn:focus-visible,
+#kollege9-wunscharbeiten-hinzufuegen-btn:focus-visible,
+#kollege0-wunscharbeiten-hinzufuegen-btn:focus-visible,
+#zeige-monat-details-btn:focus-visible,
+button[type="button"]:focus-visible {
+    outline: 2px solid var(--ap-electric);
+    outline-offset: 2px;
+}
+
+#kollege1-hinzufuegen-btn:disabled,
+#kollege2-hinzufuegen-btn:disabled,
+#kollege3-hinzufuegen-btn:disabled,
+#kollege4-hinzufuegen-btn:disabled,
+#kollege5-hinzufuegen-btn:disabled,
+#kollege6-hinzufuegen-btn:disabled,
+#kollege7-hinzufuegen-btn:disabled,
+#kollege8-hinzufuegen-btn:disabled,
+#kollege9-hinzufuegen-btn:disabled,
+#kollege0-hinzufuegen-btn:disabled,
+#kollege1-wunscharbeiten-hinzufuegen-btn:disabled,
+#kollege2-wunscharbeiten-hinzufuegen-btn:disabled,
+#kollege3-wunscharbeiten-hinzufuegen-btn:disabled,
+#kollege4-wunscharbeiten-hinzufuegen-btn:disabled,
+#kollege5-wunscharbeiten-hinzufuegen-btn:disabled,
+#kollege6-wunscharbeiten-hinzufuegen-btn:disabled,
+#kollege7-wunscharbeiten-hinzufuegen-btn:disabled,
+#kollege8-wunscharbeiten-hinzufuegen-btn:disabled,
+#kollege9-wunscharbeiten-hinzufuegen-btn:disabled,
+#kollege0-wunscharbeiten-hinzufuegen-btn:disabled,
+#zeige-monat-details-btn:disabled,
+button[type="button"]:disabled {
+    opacity: 0.48;
+    color: #7a8999;
+    background: #e8edf3;
+    border-color: #d3dde7;
+    box-shadow: none;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* ---------- Existing utility control ---------- */
+
+#allgemeine_einstellungen_ausblenden-btn {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 12px;
+    margin: 0;
+    padding: 0;
+    color: #126aa3;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-decoration: dotted;
+}
+
+/* ---------- MVP / information panel ---------- */
+
+#mvp-hinweis {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    margin-top: 8px;
+    padding: 14px;
+    color: var(--ap-text);
+    font-family: var(--ap-font);
+    font-size: 0.95rem;
+    line-height: 1.4;
+    transition: border-color 0.16s ease, box-shadow 0.16s ease;
+}
+
+#mvp-hinweis::before {
+    content: "i";
+    flex: 0 0 36px;
+    display: inline-flex;
+    width: 36px;
+    height: 36px;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    background: linear-gradient(145deg, var(--ap-primary) 0%, #0891b2 100%);
+    border: 1px solid rgba(103, 232, 249, 0.48);
+    border-radius: 50%;
+    box-shadow: 0 0 18px rgba(34, 211, 238, 0.16);
+    font-size: 0.95rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 600px) {
+    body {
+        padding: 0.7rem;
+    }
+
+    #monat-details-input-container,
+    #monat-details-ausgabe {
+        width: 100%;
+        min-width: 0;
+    }
+
+    #Benutzerdokumentation {
+        display: none;
+    }
+
+    #kollegen-1bis0-container {
+        justify-content: center;
+    }
+
+    #kollegen-1bis0-container .kollege {
+        width: 100%;
+        justify-content: center;
+    }
+
+    #hauptbereich {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    #mvp-hinweis {
+        padding: 10px 12px;
+        font-size: 0.9rem;
+    }
+
+    #mvp-hinweis .title {
+        font-size: 0.95rem;
+    }
+
+    #mvp-hinweis .text {
+        font-size: 0.88rem;
+    }
+}
+
+@media (min-width: 601px) and (max-width: 3400px) {
+    #monat-details-input-container {
+        display: flex;
+        width: clamp(300px, 28vw, 360px);
+        height: auto;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        align-items: center;
+        overflow-x: hidden;
+    }
+
+    #monat-details-ausgabe {
+        max-width: calc(100vw - 4px);
+        max-height: 60px;
+        margin-top: 0;
+        overflow-y: auto;
+        font-size: small;
+    }
+
+    #hauptbereich {
+        flex-direction: row;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    #location-name-input {
+        width: 200px;
+    }
+}
+
+/* ---------- Print ---------- */
+
+@page {
+    margin: 12mm;
+}
+
+@media print {
+    .no-print {
+        display: none !important;
+    }
+
+    button,
+    textarea,
+    select,
+    .btn,
+    .controls,
+    .kollege,
+    #mvp-hinweis,
+    #kollegen-1bis0-container,
+    #monat-details-input-container {
+        display: none !important;
+    }
+
+    #monat-details-ausgabe {
+        display: block !important;
+        color: #000 !important;
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+    }
+
+    * {
+        text-shadow: none !important;
+        box-shadow: none !important;
+        background-image: none !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    #monat-details-ausgabe,
+    #monat-details-input-container,
+    #kollegen-1bis0-container {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+
+    body,
+    html {
+        width: 100%;
+        margin: 0;
+        background: #fff !important;
+    }
+}
+
+
+/* =========================================================
+   AssistPlan – Electric Controls Upgrade
+   All existing selectors/names remain untouched.
+   Makes colleague controls and native date controls feel
+   like part of the same hi-tech interface.
+   ========================================================= */
+
+/* Every form control gets the same technical baseline */
+input,
+select,
+textarea {
+    min-height: 34px;
+    color: var(--ap-text);
+    background: linear-gradient(180deg, #ffffff 0%, #f3f7fb 100%);
+    border: 1px solid #afc2d5;
+    border-radius: 7px;
+    font-family: var(--ap-font);
+    caret-color: var(--ap-electric);
+    outline: none;
+    transition:
+        border-color 0.14s ease,
+        box-shadow 0.14s ease,
+        background 0.14s ease,
+        transform 0.10s ease;
+}
+
+input:hover,
+select:hover,
+textarea:hover {
+    border-color: #62b9cf;
+    background: #ffffff;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: var(--ap-electric);
+    background: #ffffff;
+    box-shadow:
+        0 0 0 3px rgba(34, 211, 238, 0.13),
+        0 0 16px rgba(34, 211, 238, 0.10);
+}
+
+/* Colleague cards: visibly technical modules rather than plain white boxes */
+.kollege-div {
+    position: relative;
+    overflow: hidden;
+    padding: 8px;
+    background:
+        linear-gradient(180deg, rgba(255,255,255,0.99), rgba(242,247,252,0.99));
+    border: 1px solid #b9cada;
+    border-top: 2px solid rgba(34, 211, 238, 0.72);
+    border-radius: 9px;
+}
+
+.kollege-div::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 44px;
+    height: 2px;
+    background: var(--ap-electric);
+    box-shadow: 0 0 12px rgba(34, 211, 238, 0.65);
+    pointer-events: none;
+}
+
+.kollege-div:hover {
+    border-color: rgba(34, 211, 238, 0.52);
+    box-shadow:
+        0 10px 24px rgba(0, 0, 0, 0.16),
+        0 0 18px rgba(34, 211, 238, 0.07);
+}
+
+/* Text/name fields inside colleague modules */
+.kollege-div input[type="text"],
+.kollege-div input:not([type]),
+#kollege1-name-input,
+#kollege2-name-input,
+#kollege3-name-input,
+#kollege4-name-input,
+#kollege5-name-input,
+#kollege6-name-input,
+#kollege7-name-input,
+#kollege8-name-input,
+#kollege9-name-input,
+#kollege0-name-input {
+    min-height: 36px;
+    padding: 5px 8px;
+    border-color: #afc2d5;
+    border-left: 2px solid #4c86d9;
+}
+
+/* Number / preference fields become compact "data cells" */
+.kollege-div input[type="number"],
+#kollege1-schicht-praeferenz-input,
+#kollege2-schicht-praeferenz-input,
+#kollege3-schicht-praeferenz-input,
+#kollege4-schicht-praeferenz-input,
+#kollege5-schicht-praeferenz-input,
+#kollege6-schicht-praeferenz-input,
+#kollege7-schicht-praeferenz-input,
+#kollege8-schicht-praeferenz-input,
+#kollege9-schicht-praeferenz-input,
+#kollege0-schicht-praeferenz-input,
+#kollege1-wunscharbeiten-schicht-input,
+#kollege2-wunscharbeiten-schicht-input,
+#kollege3-wunscharbeiten-schicht-input,
+#kollege4-wunscharbeiten-schicht-input,
+#kollege5-wunscharbeiten-schicht-input,
+#kollege6-wunscharbeiten-schicht-input,
+#kollege7-wunscharbeiten-schicht-input,
+#kollege8-wunscharbeiten-schicht-input,
+#kollege9-wunscharbeiten-schicht-input,
+#kollege0-wunscharbeiten-schicht-input {
+    min-height: 34px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    text-align: center;
+    background: #f5f9fd;
+}
+
+/* Native date fields / Wunschfrei:
+   enlarge the clickable target and calendar icon.
+   The popup calendar itself remains browser-native. */
+input[type="date"],
+#unbetreuter-tag-input {
+    width: auto;
+    min-width: 126px;
+    min-height: 36px;
+    padding: 4px 7px;
+    color: #123c61;
+    background: linear-gradient(180deg, #ffffff 0%, #eef7fb 100%);
+    border: 1px solid #8fb9cc;
+    border-left: 2px solid var(--ap-electric);
+    cursor: pointer;
+    color-scheme: dark;
+}
+
+input[type="date"]:hover,
+#unbetreuter-tag-input:hover {
+    border-color: var(--ap-electric);
+    box-shadow: 0 0 12px rgba(34, 211, 238, 0.10);
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    width: 20px;
+    height: 20px;
+    padding: 4px;
+    margin-left: 4px;
+    cursor: pointer;
+    opacity: 0.82;
+    border-radius: 5px;
+    background-color: rgba(34, 211, 238, 0.11);
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator:hover {
+    opacity: 1;
+    background-color: rgba(34, 211, 238, 0.22);
+}
+
+/* Month selector gets the same enlarged interaction target */
+#monat-input {
+    width: auto;
+    min-width: 126px;
+    min-height: 36px;
+    padding: 4px 7px;
+    font-size: 0.7rem;
+    border-left: 2px solid #4c86d9;
+    cursor: pointer;
+}
+
+/* Keep compact input typography consistent without shrinking names or buttons. */
+input:not([type="button"]):not([type="submit"]):not([type="reset"]):not(#location-name-input):not([id$="-name-input"]) {
+    font-size: 0.7rem;
+}
+
+#start-kollege-input {
+    font-size: 0.7rem;
+}
+
+.kollege-div input[id$="-schicht-praeferenz-input"] {
+    font-size: 0.95rem !important;
+}
+
+/* Selects read like control-console fields */
+.kollege-div select,
+select {
+    min-height: 36px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-left: 2px solid #4c86d9;
+    background: linear-gradient(180deg, #ffffff 0%, #edf5fb 100%);
+}
+
+/* Small action buttons inside colleague cards */
+.kollege-div button {
+    min-height: 34px;
+    border-color: #9fb8cc;
+}
+
+.kollege-div button:hover {
+    border-color: var(--ap-electric);
+    box-shadow:
+        0 0 0 2px rgba(34, 211, 238, 0.10),
+        0 0 14px rgba(34, 211, 238, 0.08);
+}
+
+/* Electric keyboard focus – clear and accessible */
+.kollege-div input:focus-visible,
+.kollege-div select:focus-visible,
+.kollege-div button:focus-visible,
+input[type="date"]:focus-visible {
+    outline: 2px solid var(--ap-electric);
+    outline-offset: 2px;
+}
+
+/* Preserve compact mobile behavior while keeping controls tappable */
+@media (max-width: 600px) {
+    input,
+    select,
+    textarea,
+    .kollege-div button {
+        min-height: 40px;
+    }
+
+    input[type="date"],
+    #unbetreuter-tag-input,
+    #monat-input {
+        min-width: 138px;
+        min-height: 42px;
+    }
+
+    .kollege-div {
+        padding: 10px;
+    }
+}
+
+
+/* =========================================================
+   AssistPlan – Control Sizing / Readability Fix
+   Consolidates field sizes without changing selectors/HTML.
+   ========================================================= */
+
+/* Shared control rhythm */
+input,
+select,
+textarea {
+    min-height: 36px;
+    font-size: 0.95rem;
+    line-height: 1.25;
+}
+
+/* Standard select fields: enough room for visible option text */
+select {
+    width: auto;
+    min-width: 150px;
+    max-width: 100%;
+    padding: 6px 34px 6px 10px;
+}
+
+/* Schichtsystem and other selects inside the settings panel must
+   not inherit tiny legacy widths from specialized controls. */
+#monat-details-input-container select {
+    width: auto;
+    min-width: 165px;
+    max-width: 100%;
+}
+
+/* Start colleague / Auto-Verteilung-Start:
+   keep compact, but make the value clearly readable. */
+#start-kollege-input {
+    width: 82px;
+    min-width: 82px;
+    min-height: 36px;
+    padding: 5px 9px;
+    text-align: center;
+}
+
+/* Month/date controls form one medium-sized family */
+input[type="date"],
+#monat-input,
+#unbetreuter-tag-input {
+    width: 148px;
+    min-width: 148px;
+    min-height: 36px;
+    padding: 5px 8px;
+}
+
+/* General number controls: compact data fields */
+input[type="number"] {
+    width: 72px;
+    min-width: 72px;
+    min-height: 36px;
+    padding: 5px 8px;
+    text-align: center;
+}
+
+/* Colleague name fields: primary text field */
+#kollege1-name-input,
+#kollege2-name-input,
+#kollege3-name-input,
+#kollege4-name-input,
+#kollege5-name-input,
+#kollege6-name-input,
+#kollege7-name-input,
+#kollege8-name-input,
+#kollege9-name-input,
+#kollege0-name-input,
+#location-name-input {
+    width: 180px;
+    min-width: 160px;
+    min-height: 38px;
+    padding: 6px 9px;
+    font-size: 1rem;
+}
+
+/* Colleague preference controls: compact, but not tiny */
+#kollege1-schicht-praeferenz-input,
+#kollege2-schicht-praeferenz-input,
+#kollege3-schicht-praeferenz-input,
+#kollege4-schicht-praeferenz-input,
+#kollege5-schicht-praeferenz-input,
+#kollege6-schicht-praeferenz-input,
+#kollege7-schicht-praeferenz-input,
+#kollege8-schicht-praeferenz-input,
+#kollege9-schicht-praeferenz-input,
+#kollege0-schicht-praeferenz-input {
+    width: 82px;
+    min-width: 82px;
+    min-height: 36px;
+    padding: 5px 7px;
+}
+
+/* Wunsch-Arbeiten shift controls: same compact family */
+#kollege1-wunscharbeiten-schicht-input,
+#kollege2-wunscharbeiten-schicht-input,
+#kollege3-wunscharbeiten-schicht-input,
+#kollege4-wunscharbeiten-schicht-input,
+#kollege5-wunscharbeiten-schicht-input,
+#kollege6-wunscharbeiten-schicht-input,
+#kollege7-wunscharbeiten-schicht-input,
+#kollege8-wunscharbeiten-schicht-input,
+#kollege9-wunscharbeiten-schicht-input,
+#kollege0-wunscharbeiten-schicht-input {
+    width: 82px;
+    min-width: 82px;
+    min-height: 36px;
+    padding: 5px 7px;
+    text-align: center;
+}
+
+/* Selects within colleague modules are medium controls */
+.kollege-div select {
+    width: 150px;
+    min-width: 130px;
+    max-width: 100%;
+    min-height: 36px;
+}
+
+/* Keep action buttons visually consistent */
+.kollege-div button {
+    min-height: 36px;
+}
+
+/* Responsive: controls can shrink with their container instead
+   of forcing horizontal overflow. */
+@media (max-width: 600px) {
+    select,
+    #monat-details-input-container select,
+    .kollege-div select {
+        width: 100%;
+        min-width: 0;
+        max-width: 100%;
+    }
+
+    #kollege1-name-input,
+    #kollege2-name-input,
+    #kollege3-name-input,
+    #kollege4-name-input,
+    #kollege5-name-input,
+    #kollege6-name-input,
+    #kollege7-name-input,
+    #kollege8-name-input,
+    #kollege9-name-input,
+    #kollege0-name-input,
+    #location-name-input {
+        width: min(100%, 220px);
+        min-width: 0;
+    }
+
+    input[type="date"],
+    #monat-input,
+    #unbetreuter-tag-input {
+        width: min(100%, 170px);
+        min-width: 138px;
+    }
+
+    #start-kollege-input,
+    input[type="number"],
+    #kollege1-schicht-praeferenz-input,
+    #kollege2-schicht-praeferenz-input,
+    #kollege3-schicht-praeferenz-input,
+    #kollege4-schicht-praeferenz-input,
+    #kollege5-schicht-praeferenz-input,
+    #kollege6-schicht-praeferenz-input,
+    #kollege7-schicht-praeferenz-input,
+    #kollege8-schicht-praeferenz-input,
+    #kollege9-schicht-praeferenz-input,
+    #kollege0-schicht-praeferenz-input,
+    #kollege1-wunscharbeiten-schicht-input,
+    #kollege2-wunscharbeiten-schicht-input,
+    #kollege3-wunscharbeiten-schicht-input,
+    #kollege4-wunscharbeiten-schicht-input,
+    #kollege5-wunscharbeiten-schicht-input,
+    #kollege6-wunscharbeiten-schicht-input,
+    #kollege7-wunscharbeiten-schicht-input,
+    #kollege8-wunscharbeiten-schicht-input,
+    #kollege9-wunscharbeiten-schicht-input,
+    #kollege0-wunscharbeiten-schicht-input {
+        min-height: 40px;
+    }
+}
+
+
+/* =========================================================
+   AssistPlan – Uniform Input Heights
+   General inputs and colleague inputs each get an exact,
+   internally consistent control height. Button sizes unchanged.
+   ========================================================= */
+
+:root {
+    --ap-general-input-height: 38px;
+    --ap-colleague-input-height: 36px;
+}
+
+/* General settings input fields */
+#monat-details-input-container input,
+#monat-details-input-container select {
+    height: var(--ap-general-input-height);
+    min-height: var(--ap-general-input-height);
+    max-height: var(--ap-general-input-height);
+    line-height: 1.2;
+}
+
+/* Colleague input fields */
+.kollege-div input,
+.kollege-div select {
+    height: var(--ap-colleague-input-height);
+    min-height: var(--ap-colleague-input-height);
+    max-height: var(--ap-colleague-input-height);
+    line-height: 1.2;
+}
+
+/* Native date/month controls sometimes calculate their inner box
+   differently; explicit sizing keeps them aligned with siblings. */
+#monat-details-input-container input[type="date"],
+#monat-details-input-container input[type="month"],
+.kollege-div input[type="date"],
+.kollege-div input[type="month"] {
+    box-sizing: border-box;
+}
+
+/* Keep responsive widths, but do not change the control heights. */
+@media (max-width: 600px) {
+    #monat-details-input-container input,
+    #monat-details-input-container select {
+        height: var(--ap-general-input-height);
+        min-height: var(--ap-general-input-height);
+        max-height: var(--ap-general-input-height);
+    }
+
+    .kollege-div input,
+    .kollege-div select {
+        height: var(--ap-colleague-input-height);
+        min-height: var(--ap-colleague-input-height);
+        max-height: var(--ap-colleague-input-height);
+    }
+}
+
+
+/* =========================================================
+   AssistPlan – Uniform Widths + Button Heights
+   - General controls: same width within general settings
+   - Colleague controls: same width within colleague modules
+   - Buttons: consistent height, individual widths preserved
+   ========================================================= */
+
+:root {
+    --ap-general-input-width: 170px;
+    --ap-colleague-input-width: 180px;
+    --ap-button-height: 36px;
+}
+
+/* All General controls use one exact width */
+#monat-details-input-container input,
+#monat-details-input-container select {
+    width: var(--ap-general-input-width);
+    min-width: var(--ap-general-input-width);
+    max-width: var(--ap-general-input-width);
+}
+
+/* All colleague controls use one exact width */
+.kollege-div input,
+.kollege-div select {
+    width: var(--ap-colleague-input-width);
+    min-width: var(--ap-colleague-input-width);
+    max-width: var(--ap-colleague-input-width);
+}
+
+/* Buttons: same visual height, keep their existing widths */
+button,
+#generate-einsatzplan-btn,
+#kollege1-hinzufuegen-btn,
+#kollege2-hinzufuegen-btn,
+#kollege3-hinzufuegen-btn,
+#kollege4-hinzufuegen-btn,
+#kollege5-hinzufuegen-btn,
+#kollege6-hinzufuegen-btn,
+#kollege7-hinzufuegen-btn,
+#kollege8-hinzufuegen-btn,
+#kollege9-hinzufuegen-btn,
+#kollege0-hinzufuegen-btn,
+#kollege1-wunscharbeiten-hinzufuegen-btn,
+#kollege2-wunscharbeiten-hinzufuegen-btn,
+#kollege3-wunscharbeiten-hinzufuegen-btn,
+#kollege4-wunscharbeiten-hinzufuegen-btn,
+#kollege5-wunscharbeiten-hinzufuegen-btn,
+#kollege6-wunscharbeiten-hinzufuegen-btn,
+#kollege7-wunscharbeiten-hinzufuegen-btn,
+#kollege8-wunscharbeiten-hinzufuegen-btn,
+#kollege9-wunscharbeiten-hinzufuegen-btn,
+#kollege0-wunscharbeiten-hinzufuegen-btn,
+#zeige-monat-details-btn {
+    min-height: var(--ap-button-height);
+    height: var(--ap-button-height);
+    max-height: var(--ap-button-height);
+}
+
+/* Preserve existing button widths explicitly */
+#generate-einsatzplan-btn,
+#kollege1-hinzufuegen-btn,
+#kollege2-hinzufuegen-btn,
+#kollege3-hinzufuegen-btn,
+#kollege4-hinzufuegen-btn,
+#kollege5-hinzufuegen-btn,
+#kollege6-hinzufuegen-btn,
+#kollege7-hinzufuegen-btn,
+#kollege8-hinzufuegen-btn,
+#kollege9-hinzufuegen-btn,
+#kollege0-hinzufuegen-btn,
+#kollege1-wunscharbeiten-hinzufuegen-btn,
+#kollege2-wunscharbeiten-hinzufuegen-btn,
+#kollege3-wunscharbeiten-hinzufuegen-btn,
+#kollege4-wunscharbeiten-hinzufuegen-btn,
+#kollege5-wunscharbeiten-hinzufuegen-btn,
+#kollege6-wunscharbeiten-hinzufuegen-btn,
+#kollege7-wunscharbeiten-hinzufuegen-btn,
+#kollege8-wunscharbeiten-hinzufuegen-btn,
+#kollege9-wunscharbeiten-hinzufuegen-btn,
+#kollege0-wunscharbeiten-hinzufuegen-btn,
+#zeige-monat-details-btn {
+    width: 165px;
+}
+
+button[type="button"] {
+    height: var(--ap-button-height);
+    min-height: var(--ap-button-height);
+    max-height: var(--ap-button-height);
+    /* width intentionally remains whatever the existing rule defines */
+}
+
+/* Responsive: controls can use full available width on narrow screens */
+@media (max-width: 600px) {
+    #monat-details-input-container input,
+    #monat-details-input-container select,
+    .kollege-div input,
+    .kollege-div select {
+        width: 100%;
+        min-width: 0;
+        max-width: 100%;
+    }
+
+    button,
+    #generate-einsatzplan-btn,
+    #kollege1-hinzufuegen-btn,
+    #kollege2-hinzufuegen-btn,
+    #kollege3-hinzufuegen-btn,
+    #kollege4-hinzufuegen-btn,
+    #kollege5-hinzufuegen-btn,
+    #kollege6-hinzufuegen-btn,
+    #kollege7-hinzufuegen-btn,
+    #kollege8-hinzufuegen-btn,
+    #kollege9-hinzufuegen-btn,
+    #kollege0-hinzufuegen-btn,
+    #kollege1-wunscharbeiten-hinzufuegen-btn,
+    #kollege2-wunscharbeiten-hinzufuegen-btn,
+    #kollege3-wunscharbeiten-hinzufuegen-btn,
+    #kollege4-wunscharbeiten-hinzufuegen-btn,
+    #kollege5-wunscharbeiten-hinzufuegen-btn,
+    #kollege6-wunscharbeiten-hinzufuegen-btn,
+    #kollege7-wunscharbeiten-hinzufuegen-btn,
+    #kollege8-wunscharbeiten-hinzufuegen-btn,
+    #kollege9-wunscharbeiten-hinzufuegen-btn,
+    #kollege0-wunscharbeiten-hinzufuegen-btn,
+    #zeige-monat-details-btn {
+        height: var(--ap-button-height);
+        min-height: var(--ap-button-height);
+        max-height: var(--ap-button-height);
+    }
+}
+
+
+/* =========================================================
+   AssistPlan – Colleague Card + Primary Button Alignment
+   ========================================================= */
+
+/* Name field: full usable width of each colleague card */
+.kollege-div #kollege1-name-input,
+.kollege-div #kollege2-name-input,
+.kollege-div #kollege3-name-input,
+.kollege-div #kollege4-name-input,
+.kollege-div #kollege5-name-input,
+.kollege-div #kollege6-name-input,
+.kollege-div #kollege7-name-input,
+.kollege-div #kollege8-name-input,
+.kollege-div #kollege9-name-input,
+.kollege-div #kollege0-name-input {
+    display: block;
+    width: calc(100% - 8px);
+    min-width: 0;
+    max-width: calc(100% - 8px);
+    margin: 4px;
+}
+
+/* Schicht, Arbeitstage and Wunschfrei:
+   same control width within colleague cards */
+.kollege-div select,
+.kollege-div input[type="number"],
+.kollege-div input[type="date"] {
+    width: 150px;
+    min-width: 150px;
+    max-width: 150px;
+}
+
+/* Generate button: same height as the other buttons and
+   remove the small horizontal/vertical visual offset */
+#generate-einsatzplan-btn {
+    height: var(--ap-button-height);
+    min-height: var(--ap-button-height);
+    max-height: var(--ap-button-height);
+    margin-top: 0;
+    margin-left: 0;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    align-self: auto;
+    vertical-align: middle;
+}
+
+/* Keep colleague card controls responsive */
+@media (max-width: 600px) {
+    .kollege-div #kollege1-name-input,
+    .kollege-div #kollege2-name-input,
+    .kollege-div #kollege3-name-input,
+    .kollege-div #kollege4-name-input,
+    .kollege-div #kollege5-name-input,
+    .kollege-div #kollege6-name-input,
+    .kollege-div #kollege7-name-input,
+    .kollege-div #kollege8-name-input,
+    .kollege-div #kollege9-name-input,
+    .kollege-div #kollege0-name-input {
+        width: calc(100% - 8px);
+        min-width: 0;
+        max-width: calc(100% - 8px);
+    }
+
+    .kollege-div select,
+    .kollege-div input[type="number"],
+    .kollege-div input[type="date"] {
+        width: 100%;
+        min-width: 0;
+        max-width: 100%;
+    }
+
+    #generate-einsatzplan-btn {
+        height: var(--ap-button-height);
+        min-height: var(--ap-button-height);
+        max-height: var(--ap-button-height);
+        margin-top: 0;
+        margin-left: 0;
+    }
+}
+
+
+/* =========================================================
+   AssistPlan – V7 precision fixes
+   ========================================================= */
+
+/* Kollegen: Schicht-Auswahl exakt so breit wie Wunschfrei.
+   !important overrides older ID-specific width rules safely. */
+.kollege-div select,
+.kollege-div input[type="date"] {
+    width: 150px !important;
+    min-width: 150px !important;
+    max-width: 150px !important;
+    box-sizing: border-box;
+}
+
+/* Einsatzplan generieren:
+   remove remaining left offset caused by parent/flex/legacy spacing.
+   Keep same button height. */
+#generate-einsatzplan-btn {
+    position: relative;
+    left: 0 !important;
+    right: auto !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    transform: none;
+    height: var(--ap-button-height) !important;
+    min-height: var(--ap-button-height) !important;
+    max-height: var(--ap-button-height) !important;
+}
+
+/* Align the primary button to the same left edge as controls
+   inside the general settings flex container. */
+#monat-details-input-container #generate-einsatzplan-btn {
+    align-self: flex-start;
+}
+
+/* Preserve hover/active movement vertically only */
+#generate-einsatzplan-btn:hover,
+#generate-einsatzplan-btn:focus-visible {
+    transform: translateY(-1px);
+}
+
+#generate-einsatzplan-btn:active {
+    transform: translateY(1px) scale(0.985);
+}
+
+@media (max-width: 600px) {
+    .kollege-div select,
+    .kollege-div input[type="date"] {
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+    }
+
+    #generate-einsatzplan-btn {
+        left: 0 !important;
+        margin-left: 0 !important;
+    }
+}
+
+
+/* =========================================================
+   AssistPlan – V8 exact colleague-field + button alignment fix
+   ========================================================= */
+
+/* "Schichten" is type="text", not a select.
+   Match it exactly to Arbeitstage and Wunschfrei. */
+#kollege1-schicht-praeferenz-input,
+#kollege2-schicht-praeferenz-input,
+#kollege3-schicht-praeferenz-input,
+#kollege4-schicht-praeferenz-input,
+#kollege5-schicht-praeferenz-input,
+#kollege6-schicht-praeferenz-input,
+#kollege7-schicht-praeferenz-input,
+#kollege8-schicht-praeferenz-input,
+#kollege9-schicht-praeferenz-input,
+#kollege0-schicht-praeferenz-input,
+.kollege-div input[type="number"],
+.kollege-div input[type="date"] {
+    width: 150px !important;
+    min-width: 150px !important;
+    max-width: 150px !important;
+    box-sizing: border-box;
+}
+
+/* The general controls are 170px wide while the main button is 165px.
+   Center the button under them instead of leaving it visually 2.5px left. */
+#monat-details-input-container #generate-einsatzplan-btn {
+    width: 165px;
+    height: var(--ap-button-height) !important;
+    min-height: var(--ap-button-height) !important;
+    max-height: var(--ap-button-height) !important;
+    margin-top: 0 !important;
+    margin-left: 2.5px !important;
+    margin-right: 2.5px !important;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    align-self: flex-start;
+    box-sizing: border-box;
+}
+
+/* Responsive: colleague fields can still use available width.
+   Main action does not force horizontal overflow. */
+@media (max-width: 600px) {
+    #kollege1-schicht-praeferenz-input,
+    #kollege2-schicht-praeferenz-input,
+    #kollege3-schicht-praeferenz-input,
+    #kollege4-schicht-praeferenz-input,
+    #kollege5-schicht-praeferenz-input,
+    #kollege6-schicht-praeferenz-input,
+    #kollege7-schicht-praeferenz-input,
+    #kollege8-schicht-praeferenz-input,
+    #kollege9-schicht-praeferenz-input,
+    #kollege0-schicht-praeferenz-input,
+    .kollege-div input[type="number"],
+    .kollege-div input[type="date"] {
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+    }
+
+    #monat-details-input-container #generate-einsatzplan-btn {
+        margin-left: 2.5px !important;
+        margin-right: 0 !important;
+        max-width: calc(100% - 2.5px);
+    }
+}
+
+
+/* =========================================================
+   AssistPlan – V9 compact 5-card desktop layout
+   Goal: five colleague modules side by side on normal desktop
+   without changing the existing mobile breakpoint behavior.
+   ========================================================= */
+
+:root {
+    --ap-colleague-card-min: 188px;
+    --ap-colleague-card-gap: 8px;
+    --ap-colleague-control-width: 128px;
+}
+
+/* The existing colleague area becomes a compact technical row.
+   flex-wrap is retained so narrower viewports can still wrap naturally. */
+#kollegen-container,
+#kollegen-1bis0-container {
+    gap: var(--ap-colleague-card-gap);
+    align-items: stretch;
+}
+
+/* Compact colleague modules: less outer/inner whitespace, same visual language */
+.kollege-div {
+    flex: 1 1 var(--ap-colleague-card-min);
+    min-width: var(--ap-colleague-card-min);
+    max-width: 1fr;
+    padding: 10px 9px 12px;
+    margin: 0;
+    box-sizing: border-box;
+    border-radius: 9px;
+}
+
+/* Slightly tighter module heading */
+.kollege-div > b:first-child {
+    display: inline-block;
+    margin-bottom: 5px;
+    font-size: 0.88rem;
+    letter-spacing: 0.035em;
+}
+
+/* Labels: compact technical metadata look */
+.kollege-div label {
+    display: inline-block;
+    margin-top: 3px;
+    margin-bottom: 2px;
+    font-size: 0.76rem;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: 0.015em;
+}
+
+/* Name stays almost full-card width */
+.kollege-div input[type="text"][id$="-name-input"] {
+    display: block;
+    width: calc(100% - 4px) !important;
+    min-width: 0 !important;
+    max-width: calc(100% - 4px) !important;
+    margin: 3px 2px 5px !important;
+    box-sizing: border-box;
+}
+
+/* Main colleague controls: same compact width.
+   Includes the text-based "Schichten" preference field. */
+.kollege-div input[type="date"],
+.kollege-div input[type="number"],
+#kollege1-schicht-praeferenz-input,
+#kollege2-schicht-praeferenz-input,
+#kollege3-schicht-praeferenz-input,
+#kollege4-schicht-praeferenz-input,
+#kollege5-schicht-praeferenz-input,
+#kollege6-schicht-praeferenz-input,
+#kollege7-schicht-praeferenz-input,
+#kollege8-schicht-praeferenz-input,
+#kollege9-schicht-praeferenz-input,
+#kollege0-schicht-praeferenz-input {
+    width: var(--ap-colleague-control-width) !important;
+    min-width: var(--ap-colleague-control-width) !important;
+    max-width: var(--ap-colleague-control-width) !important;
+    box-sizing: border-box;
+}
+
+/* Reduce visual bulk without shrinking controls themselves */
+.kollege-div input,
+.kollege-div select {
+    margin-top: 2px;
+    margin-bottom: 20px;
+}
+
+/* Keep action buttons compact and consistent in height;
+   widths remain intentionally different. */
+.kollege-div button {
+    min-height: var(--ap-button-height);
+    height: var(--ap-button-height);
+    max-height: var(--ap-button-height);
+    margin-top: 3px;
+    margin-bottom: 2px;
+}
+
+/* Strengthen the "technical module" feel very subtly */
+.kollege-div {
+    position: relative;
+    overflow: hidden;
+}
+
+.kollege-div::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 9px;
+    right: 9px;
+    height: 2px;
+    border-radius: 0 0 2px 2px;
+    background: linear-gradient(90deg, rgba(34, 211, 238, .35), rgba(37, 99, 235, .8), rgba(34, 211, 238, .35));
+}
+
+/* Preserve the established mobile behavior rather than forcing five columns. */
+@media (max-width: 600px) {
+    .kollege-div {
+        flex: 1 1 100%;
+        width: 100%;
+        min-width: 0;
+        max-width: 100%;
+        padding: 10px 9px 12px;
+    }
+
+    .kollege-div input[type="date"],
+    .kollege-div input[type="number"],
+    #kollege1-schicht-praeferenz-input,
+    #kollege2-schicht-praeferenz-input,
+    #kollege3-schicht-praeferenz-input,
+    #kollege4-schicht-praeferenz-input,
+    #kollege5-schicht-praeferenz-input,
+    #kollege6-schicht-praeferenz-input,
+    #kollege7-schicht-praeferenz-input,
+    #kollege8-schicht-praeferenz-input,
+    #kollege9-schicht-praeferenz-input,
+    #kollege0-schicht-praeferenz-input {
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+    }
+
+    .kollege-div input[type="text"][id$="-name-input"] {
+        width: calc(100% - 4px) !important;
+        max-width: calc(100% - 4px) !important;
+    }
+}
+
+
+/* =========================================================
+   AssistPlan – V10 Dark Operations Interface
+   Visual-only refinement: graphite/black surfaces, less white,
+   restrained cyan signal accents. Existing layout is preserved.
+   ========================================================= */
+
+:root {
+    --ap-bg: #05080d;
+    --ap-bg-2: #080d14;
+    --ap-surface: #101720;
+    --ap-surface-2: #151e29;
+    --ap-surface-3: #0b121b;
+    --ap-text: #d7e0e8;
+    --ap-text-strong: #eef4f8;
+    --ap-muted: #81909f;
+    --ap-border: #263747;
+    --ap-border-soft: #1a2936;
+    --ap-primary: #167b9b;
+    --ap-electric: #22d3ee;
+    --ap-electric-soft: rgba(34, 211, 238, .14);
+}
+
+/* Near-black application canvas with an extremely subtle technical grid */
+body {
+    color: var(--ap-text);
+    background-color: var(--ap-bg);
+    background-image:
+        linear-gradient(rgba(34, 211, 238, .018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(34, 211, 238, .018) 1px, transparent 1px),
+        radial-gradient(circle at 50% 0%, rgba(22, 123, 155, .09), transparent 42%);
+    background-size: 28px 28px, 28px 28px, 100% 100%;
+}
+
+/* Main functional surfaces: graphite rather than white */
+#monat-details-input-container,
+#kollegen-container,
+#kollegen-1bis0-container,
+#monat-details-container,
+#mvp-hinweis,
+.mvp-hinweis,
+.info-box {
+    color: var(--ap-text);
+    background: linear-gradient(180deg, #111923 0%, #0d141d 100%);
+    border-color: var(--ap-border);
+    box-shadow:
+        0 14px 34px rgba(0, 0, 0, .28),
+        inset 0 1px 0 rgba(255, 255, 255, .025);
+}
+
+/* Colleague cards as dark technical modules */
+.kollege-div {
+    color: var(--ap-text);
+    background:
+        linear-gradient(180deg, rgba(21, 30, 41, .98), rgba(14, 21, 30, .98));
+    border: 1px solid var(--ap-border);
+    box-shadow:
+        0 8px 20px rgba(0, 0, 0, .24),
+        inset 0 1px 0 rgba(255, 255, 255, .025);
+}
+
+.kollege-div::before {
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(34, 211, 238, .38),
+        rgba(34, 211, 238, .72),
+        rgba(34, 211, 238, .38),
+        transparent
+    );
+    box-shadow: 0 0 9px rgba(34, 211, 238, .16);
+}
+
+/* Headings */
+h1, h2, h3,
+.kollege-div > b:first-child {
+    color: var(--ap-text-strong);
+}
+
+h1 {
+    text-shadow: 0 0 22px rgba(34, 211, 238, .08);
+}
+
+.kollege-div > b:first-child {
+    color: #cde8ee;
+}
+
+/* Labels and secondary copy */
+label,
+.kollege-div label,
+small,
+.secondary-text {
+    color: var(--ap-muted);
+}
+
+/* Dark controls instead of white fields */
+input,
+select,
+textarea,
+#start-kollege-input,
+#monat-input,
+#unbetreuter-tag-input {
+    color: var(--ap-text-strong);
+    background: linear-gradient(180deg, #0d151f 0%, #091018 100%);
+    border: 1px solid #304253;
+    box-shadow:
+        inset 0 1px 2px rgba(0, 0, 0, .34),
+        0 1px 0 rgba(255, 255, 255, .018);
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: #657585;
+    opacity: 1;
+}
+
+/* Keep native controls legible in dark UI */
+input[type="date"],
+input[type="month"] {
+    color-scheme: dark;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="month"]::-webkit-calendar-picker-indicator {
+    opacity: .78;
+    cursor: pointer;
+}
+
+/* Restrained cyan focus: signal, not decoration */
+input:focus,
+select:focus,
+textarea:focus,
+#start-kollege-input:focus,
+#monat-input:focus,
+#unbetreuter-tag-input:focus {
+    outline: none;
+    color: #f3fbfd;
+    border-color: rgba(34, 211, 238, .78);
+    background: #0b141d;
+    box-shadow:
+        0 0 0 2px rgba(34, 211, 238, .10),
+        0 0 14px rgba(34, 211, 238, .08),
+        inset 0 1px 2px rgba(0, 0, 0, .30);
+}
+
+/* Dark secondary buttons */
+button,
+button[type="button"],
+.kollege-div button {
+    color: #dce7ed;
+    background: linear-gradient(180deg, #1b2732 0%, #111a23 100%);
+    border: 1px solid #344758;
+    box-shadow:
+        0 3px 9px rgba(0, 0, 0, .24),
+        inset 0 1px 0 rgba(255, 255, 255, .04);
+}
+
+button:hover,
+button[type="button"]:hover,
+.kollege-div button:hover {
+    color: #effcff;
+    border-color: rgba(34, 211, 238, .55);
+    background: linear-gradient(180deg, #202f3b 0%, #131e28 100%);
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, .27),
+        0 0 10px rgba(34, 211, 238, .06),
+        inset 0 1px 0 rgba(255, 255, 255, .045);
+}
+
+/* Primary action: dark graphite -> controlled cyan rather than bright blue */
+#generate-einsatzplan-btn {
+    color: #ecfcff;
+    background:
+        linear-gradient(105deg, #15232c 0%, #123b49 55%, #12657a 100%);
+    border: 1px solid rgba(34, 211, 238, .56);
+    box-shadow:
+        0 5px 15px rgba(0, 0, 0, .30),
+        0 0 13px rgba(34, 211, 238, .10),
+        inset 0 1px 0 rgba(255, 255, 255, .08);
+}
+
+#generate-einsatzplan-btn:hover {
+    background:
+        linear-gradient(105deg, #182a34 0%, #154757 55%, #16788e 100%);
+    border-color: rgba(34, 211, 238, .78);
+    box-shadow:
+        0 6px 17px rgba(0, 0, 0, .32),
+        0 0 17px rgba(34, 211, 238, .14),
+        inset 0 1px 0 rgba(255, 255, 255, .09);
+}
+
+/* Output/details areas */
+#monat-details-container table,
+#monat-details-container th,
+#monat-details-container td {
+    border-color: var(--ap-border);
+}
+
+#monat-details-container th {
+    color: #bcd7df;
+    background: #121d27;
+}
+
+#monat-details-container td {
+    color: var(--ap-text);
+    background: #0d151e;
+}
+
+/* Links/info accents */
+a {
+    color: #55d9eb;
+}
+
+a:hover {
+    color: #8ce9f4;
+}
+
+/* Scrollbar refinement where supported */
+* {
+    scrollbar-color: #314553 #090e14;
+}
+
+/* Print remains readable on paper despite dark screen theme */
+@media print {
+    body,
+    #monat-details-container,
+    #monat-details-container table,
+    #monat-details-container th,
+    #monat-details-container td {
+        color: #000 !important;
+        background: #fff !important;
+        text-shadow: none !important;
+        box-shadow: none !important;
+    }
+}
+
+
+/* =========================================================
+   AssistPlan – V11 input contrast refinement
+   Softer light fields + explicit readable text for every control.
+   ========================================================= */
+
+/* Global form controls: force a coherent dark surface and readable text.
+   !important is intentional here because older ID-specific rules in the
+   legacy stylesheet can otherwise reintroduce white backgrounds/text. */
+input,
+select,
+textarea,
+.kollege-div input,
+.kollege-div select,
+#monat-details-input-container input,
+#monat-details-input-container select {
+    color: #dbe6ec !important;
+    background-color: #101820 !important;
+    background-image: linear-gradient(180deg, #121c25 0%, #0d151d 100%) !important;
+    border-color: #304251 !important;
+    caret-color: #55d9eb;
+    -webkit-text-fill-color: #dbe6ec;
+}
+
+/* Text/name fields need especially clear contrast */
+input[type="text"],
+.kollege-div input[type="text"],
+.kollege-div input[id$="-name-input"] {
+    color: #e5edf2 !important;
+    -webkit-text-fill-color: #e5edf2 !important;
+    background: #101922 !important;
+}
+
+/* Numeric/date/month controls */
+input[type="number"],
+input[type="date"],
+input[type="month"] {
+    color: #dbe6ec !important;
+    -webkit-text-fill-color: #dbe6ec !important;
+    background-color: #101820 !important;
+    color-scheme: dark;
+}
+
+/* Selects and their dropdown options */
+select {
+    color: #dbe6ec !important;
+    -webkit-text-fill-color: #dbe6ec !important;
+}
+
+select option {
+    color: #dbe6ec;
+    background: #101820;
+}
+
+/* Softer placeholders: visible, but clearly secondary */
+input::placeholder,
+textarea::placeholder,
+.kollege-div input::placeholder {
+    color: #778896 !important;
+    -webkit-text-fill-color: #778896 !important;
+    opacity: 1;
+}
+
+/* Autofill can otherwise create a very bright browser-controlled field */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+    -webkit-text-fill-color: #e5edf2 !important;
+    caret-color: #55d9eb;
+    -webkit-box-shadow: 0 0 0 1000px #101922 inset !important;
+    box-shadow: 0 0 0 1000px #101922 inset !important;
+}
+
+/* Focus remains dark; no sudden white/high-contrast surface */
+input:focus,
+select:focus,
+textarea:focus,
+.kollege-div input:focus,
+.kollege-div select:focus {
+    color: #f0f7fa !important;
+    -webkit-text-fill-color: #f0f7fa !important;
+    background-color: #121d26 !important;
+    background-image: none !important;
+    border-color: rgba(34, 211, 238, .76) !important;
+}
+
+/* Disabled/read-only states should not look like bright white fields */
+input:disabled,
+select:disabled,
+textarea:disabled,
+input[readonly] {
+    color: #91a0ab !important;
+    -webkit-text-fill-color: #91a0ab !important;
+    background: #0c1218 !important;
+    border-color: #24333f !important;
+    opacity: .85;
+}
+
+
+/* =========================================================
+   AssistPlan – V12 colleague preview / control overview
+   Wunschfrei + Wunsch-Arbeitstage after "Aktualisieren"
+   ========================================================= */
+
+/* Preview/output text inside colleague cards:
+   override legacy dark/blue text colors for the dark UI. */
+.kollege-div p,
+.kollege-div span,
+.kollege-div div,
+.kollege-div ul,
+.kollege-div ol,
+.kollege-div li {
+    color: #c9d6de;
+}
+
+/* Strong/emphasized values stay clearly readable */
+.kollege-div strong,
+.kollege-div b {
+    color: #e6eef3;
+}
+
+/* If the generated preview uses tables */
+.kollege-div table,
+.kollege-div th,
+.kollege-div td {
+    color: #c9d6de;
+    border-color: #2b3c49;
+}
+
+.kollege-div th {
+    color: #91dce7;
+}
+
+/* Generated controls/overview areas should not fall back to white */
+.kollege-div p,
+.kollege-div ul,
+.kollege-div ol,
+.kollege-div table {
+    background-color: transparent;
+}
+
+/* Links or interactive preview text */
+.kollege-div a {
+    color: #55d9eb;
+}
+
+.kollege-div a:hover {
+    color: #8ce9f4;
+}
+
+
+/* =========================================================
+   AssistPlan – V13 heading always above general settings
+   ========================================================= */
+
+/* The main area may remain flex-based, but the H1 must always
+   occupy its own full row above the application controls. */
+#hauptbereich {
+    flex-wrap: wrap;
+}
+
+#hauptbereich > h1,
+#hauptbereich h1 {
+    flex: 0 0 100%;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+/* Prevent legacy desktop rules from placing the title beside
+   the general-settings panel. */
+h1 {
+    display: block;
+    width: 100%;
+    clear: both;
+}
+
+#monat-details-input-container > h1 {
+    width: var(--ap-general-input-width);
+    max-width: var(--ap-general-input-width);
+    align-self: center;
+}
+
+#monat-details-input-container #generate-einsatzplan-btn {
+    align-self: center;
+}
+
+@media (max-width: 600px) {
+    #monat-details-input-container #location-name-input {
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+    }
+}
+
+/* General settings actions: secondary controls together, primary action below. */
+.settings-actions {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.secondary-actions {
+    display: flex;
+    width: 100%;
+    gap: 8px;
+}
+
+.secondary-actions button {
+    flex: 1 1 0;
+    width: auto;
+    min-width: 0;
+}
+
+#reset-general-settings-btn {
+    color: #aab8c2;
+    background: #111a23;
+    border-color: #2b3b48;
+    box-shadow: none;
+}
+
+#reset-general-settings-btn:hover,
+#reset-general-settings-btn:focus-visible {
+    color: #d9e5ea;
+    background: #18232d;
+    border-color: #557080;
+}
+
+#monat-details-input-container #generate-einsatzplan-btn {
+    width: 100%;
+    margin: 0 !important;
+}
+
+@media (max-width: 600px) {
+    .secondary-actions {
+        flex-direction: column;
+    }
+}
+
+/* Compact general settings: two columns reduce vertical space above the cards. */
+.general-fields {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px 12px;
+    width: 100%;
+}
+
+.general-fields label {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: 2px;
+    color: var(--ap-muted);
+    font-size: 0.72rem;
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+.general-fields input,
+.general-fields select {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+}
+
+.general-field-full {
+    grid-column: 1 / -1;
+}
+
+#monat-details-input-container {
+    padding: 10px;
+}
+
+#monat-details-input-container > h1 {
+    margin-bottom: 3px;
+    font-size: 1.55rem;
+}
+
+.settings-header {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 6px;
+    margin-bottom: 3px;
+}
+
+.settings-header h1 {
+    flex: 0 0 auto;
+    width: auto !important;
+    max-width: none !important;
+    margin: 0;
+}
+
+#assistplan-tools {
+    display: flex !important;
+    flex: 0 0 100%;
+    position: static !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    align-items: center;
+    gap: 3px;
+}
+
+#assistplan-tools button {
+    display: inline-flex !important;
+    width: auto;
+    min-width: 0;
+    min-height: 18px;
+    height: 18px;
+    max-height: 18px;
+    align-items: center;
+    justify-content: center;
+    padding: 1px 4px;
+    color: #9aabb5;
+    background: #0b121b;
+    border: 1px solid #263747;
+    border-radius: 4px;
+    font-size: 0.55rem;
+    line-height: 1;
+    white-space: nowrap;
+}
+
+#Benutzerdokumentation {
+    display: inline-flex !important;
+}
+
+@media (min-width: 601px) {
+    #monat-details-input-container .settings-header #assistplan-tools,
+    #monat-details-input-container .settings-header #assistplan-tools button,
+    #monat-details-input-container .settings-header #Benutzerdokumentation {
+        display: inline-flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+}
+
+.general-fields input,
+.general-fields select {
+    height: 36px !important;
+    min-height: 36px !important;
+    max-height: 36px !important;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+.settings-actions {
+    gap: 7px;
+    margin-top: 8px;
+}
+
+.settings-actions button {
+    height: 32px;
+    min-height: 32px;
+    max-height: 32px;
+}
+
+#reset-general-settings-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    height: 32px !important;
+    min-height: 32px !important;
+    max-height: 32px !important;
+}
+
+#reset-general-settings-btn::before {
+    content: "↺";
+    font-size: 1rem;
+    line-height: 1;
+}
+
+.secondary-actions #zeige-monat-details-btn,
+.secondary-actions #reset-general-settings-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 !important;
+    padding: 6px 14px;
+    height: 36px !important;
+    min-height: 36px !important;
+    max-height: 36px !important;
+    box-sizing: border-box;
+    border-radius: 7px;
+    line-height: 1.2;
+}
+
+.secondary-actions {
+    align-items: stretch;
+    margin: 0;
+    gap: 8px;
+}
+
+.secondary-actions #reset-general-settings-btn {
+    gap: 0.35rem;
+}
+
+@media (max-width: 600px) {
+    .general-fields {
+        grid-template-columns: 1fr;
+    }
+
+    .general-field-full {
+        grid-column: auto;
+    }
+}
+
+/* Colleague action pairs: primary action matches the input fields, Reset fills the rest. */
+.kollege-div button + br {
+    display: none;
+}
+
+.kollege-div button:not([type="button"]) {
+    display: inline-flex;
+    float: left;
+    width: var(--ap-colleague-control-width) !important;
+    min-width: var(--ap-colleague-control-width) !important;
+    max-width: var(--ap-colleague-control-width) !important;
+    margin-right: 4px;
+    box-sizing: border-box;
+    vertical-align: middle;
+}
+
+.kollege-div button[type="button"] {
+    display: inline-flex;
+    float: left;
+    width: calc(100% - var(--ap-colleague-control-width) - 8px) !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    box-sizing: border-box;
+    vertical-align: middle;
+}
+
+.kollege-div button[type="button"] + br {
+    display: block;
+    clear: both;
+    height: 0;
+}
+
+/* Reset uses a compact undo symbol instead of a long text label. */
+.kollege-div button[type="button"] {
+    align-items: center;
+    justify-content: center;
+    width: 36px !important;
+    min-width: 36px !important;
+    max-width: 36px !important;
+    padding: 0 !important;
+    font-size: 0;
+}
+
+.kollege-div button[type="button"]::before {
+    content: "↺";
+    color: currentColor;
+    font-size: 1.05rem;
+    line-height: 1;
+    transform: translateX(0);
+}
