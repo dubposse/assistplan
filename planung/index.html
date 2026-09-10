@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="AssistPlan ist ein digitaler Einsatzplaner für Betreuung und Pflege. Plane Einsätze, Mitarbeitende und Touren einfach, übersichtlich und effizient.">
+    <meta name="description" content="AssistPlan ist ein digitaler Einsatzplaner für kleine Teams. Mitarbeiter, Schichten und freie Tage übersichtlich planen, individuelle Wünsche berücksichtigen und den Einsatzplan automatisch vorplanen.">
     <meta name="author" content="Matthias Brehm">
 
     <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <title>AssistPlan - Digitaler Einsatzplaner für Betreuung & Pflege</title>
+    <title>AssistPlan - Einsatzplanung für kleine Teams</title>
 </head>
 <body>
 
@@ -53,8 +53,8 @@
                 <strong style="color:#dce8ed;">Beim Schließen oder Neuladen der Seite gehen alle Eingaben verloren.</strong>
             </p>
             <p style="margin:0;">
-                AssistPlan funktioniert aktuell ausschließlich mit
-                <strong style="color:#dce8ed;">Google Chrome auf Desktop-Geräten</strong>.
+                AssistPlan unterstützt aktuell
+                <strong style="color:#dce8ed;">Google Chrome und Microsoft Edge auf Desktop-Geräten</strong>.
             </p>
         </section>
     </div>
@@ -91,39 +91,59 @@
                 font-size:1.25rem;
                 cursor:pointer;
             ">×</button>
-            <h2 id="einsteiger-videos-title" style="margin:0 2rem 1rem 0; color:#eef4f8; font-size:1.05rem;">Einsteiger-Videos</h2>
+            <h2 id="einsteiger-videos-title" style="margin:0 2rem 1rem 0; color:#eef4f8; font-size:1.05rem;">Videos</h2>
             <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:1rem;">
                 <article>
-                    <h3 style="margin:0 0 .4rem; font-size:.95rem; color:#dce8ed;">Video 1</h3>
+                    <h3 style="margin:0 0 .4rem; font-size:.95rem; color:#dce8ed;">1. Grundeinstellungen festlegen</h3>
+                    <p style="margin:0 0 .8rem; font-size:.85rem; color:#c0d4dd;">Monat, planungsfreie Tage und Schichtmodell für die Einsatzplanung festlegen.</p>
                     <video controls preload="metadata" style="display:block; width:100%; border-radius:6px; background:#05090c;">
-                        <source src="Videos/1.mp4" type="video/mp4">
+                        <source src="Videos/assistplan-grundeinstellungen.mp4" type="video/mp4">
                         Ihr Browser unterstützt dieses Videoformat nicht.
                     </video>
                 </article>
                 <article>
-                    <h3 style="margin:0 0 .4rem; font-size:.95rem; color:#dce8ed;">Video 2</h3>
+                    <h3 style="margin:0 0 .4rem; font-size:.95rem; color:#dce8ed;">2. Grundeinstellungen prüfen</h3>
+                    <p style="margin:0 0 .8rem; font-size:.85rem; color:#c0d4dd;">Überprüfen, ob Monat, planungsfreie Tage und Schichtmodell korrekt eingestellt sind.</p>
                     <video controls preload="metadata" style="display:block; width:100%; border-radius:6px; background:#05090c;">
-                        <source src="Videos/2.mp4" type="video/mp4">
+                        <source src="Videos/assistplan-grundeinstellungen-pruefen.mp4" type="video/mp4">
                         Ihr Browser unterstützt dieses Videoformat nicht.
                     </video>
                 </article>
                 <article>
-                    <h3 style="margin:0 0 .4rem; font-size:.95rem; color:#dce8ed;">Video 3</h3>
+                    <h3 style="margin:0 0 .4rem; font-size:.95rem; color:#dce8ed;">3. Dienstplan erstellen und anpassen</h3>
+                    <p style="margin:0 0 .8rem; font-size:.85rem; color:#c0d4dd;">Dienstplan erstellen und anpassen.</p>
                     <video controls preload="metadata" style="display:block; width:100%; border-radius:6px; background:#05090c;">
-                        <source src="Videos/3.mp4" type="video/mp4">
+                        <source src="Videos/assistplan-dienstplan-erstellen.mp4" type="video/mp4">
                         Ihr Browser unterstützt dieses Videoformat nicht.
                     </video>
                 </article>
                 <article>
-                    <h3 style="margin:0 0 .4rem; font-size:.95rem; color:#dce8ed;">Video 4</h3>
+                    <h3 style="margin:0 0 .4rem; font-size:.95rem; color:#dce8ed;">4. Dienstplan drucken</h3>
+                    <p style="margin:0 0 .8rem; font-size:.85rem; color:#c0d4dd;">Den fertigen Einsatzplan über die Druckfunktion ausgeben.</p>
                     <video controls preload="metadata" style="display:block; width:100%; border-radius:6px; background:#05090c;">
-                        <source src="Videos/4.mp4" type="video/mp4">
+                        <source src="Videos/assistplan-drucken.mp4" type="video/mp4">
                         Ihr Browser unterstützt dieses Videoformat nicht.
                     </video>
                 </article>
             </div>
         </section>
     </div>
+
+    <section id="schnellstart-fenster" hidden role="dialog" aria-labelledby="schnellstart-titel">
+        <header id="schnellstart-kopf">
+            <h2 id="schnellstart-titel">Schnellstart</h2>
+            <button type="button" id="schnellstart-schliessen" aria-label="Schnellstart schließen">×</button>
+        </header>
+        <ol>
+            <li><strong>Monat wählen</strong><span> <b>Aktualisieren</b> klicken</span></li>
+            <li><strong>Zur Kollegen-Eingabe scrollen</strong><span>Darüber ist eine Ansicht zum > Prüfen</span></li>
+            <li><strong>Schichten wählen</strong><span></span><span><b>Aktualisieren</b> klicken (Gesperrt nach Eingabe | <b>Reload</b> nötig)</span></li>
+            <li><strong>Wünsche wählen</strong><span>Wunschfrei wählen >> <b>Aktualisieren</b> > Prüfen</span>
+            <span>Wunsch-Arbeitstag wählen >> <b>Hinzufügen</b> > Prüfen</span></li>
+            <li><strong>Plan erstellen</strong><span><b>Einsatzplan generieren</b> klicken</span></li>
+            <li><strong>Plan anpassen</strong><span>Den erzeugten Plan prüfen und per Drag &amp; Drop anpassen</span></li>
+        </ol>
+    </section>
 
     <aside id="zoom-info-tooltip" hidden role="status" aria-label="Tipp zur Bildschirmansicht" style="
         position:fixed;
@@ -166,9 +186,10 @@
     <div class="settings-header">
         <h1>AssistPlan</h1>
         <nav id="assistplan-tools" aria-label="Hilfe und Informationen">
-                <button type="button" id="nutzungshinweis-btn">Nutzungshinweis</button>
-            <button type="button" id="einsteiger-videos-btn">Einsteiger-Videos</button>
-                <button type="button" id="Benutzerdokumentation" onclick="window.open('/planung/benutzerhandbuch/', '_blank')">Benutzerhandbuch</button>
+            <button type="button" id="schnellstart-btn">Schnellstart</button>
+            <button type="button" id="einsteiger-videos-btn">Videos</button>
+            <button type="button" id="nutzungshinweis-btn">Hinweise</button>
+            <button type="button" id="Benutzerdokumentation" onclick="window.open('/planung/benutzerhandbuch/', '_blank')">Benutzerhandbuch</button>
         </nav>
     </div>
  
@@ -278,7 +299,7 @@
                          <!-- Step  2 -->
 
 <div id="kollegen-1bis0-container" style="display: flex; justify-content: center; align-items: center; ">
-<div class="kollege-div">
+<div class="kollege-div has-schicht-hinweis">
 <!-- Kollegen 1 hinzufügen -->
     <b>Kollege 1</b><br>
     <input type="text" id="kollege1-name-input" name="kollege1-name-input" placeholder="Name"> <br>
@@ -291,7 +312,7 @@
     <label for="kollege1-wunschfrei-input">Wunschfrei</label>
     <input type="date" id="kollege1-wunschfrei-input" name="kollege1-wunschfrei-input" min="2026-01-01">  <br>
 
-    <label for="kollege1-schicht-praeferenz-input">Schichten &nbsp</label> 
+    <label for="kollege1-schicht-praeferenz-input">Schichten <span class="schicht-hinweis" tabindex="0" aria-label="Hinweise zur Schichteingabe">?</span><span class="schicht-tooltip" role="tooltip"><strong>Mögliche Eingaben</strong><span class="schicht-optionen">1&nbsp;&nbsp;|&nbsp;&nbsp;2&nbsp;&nbsp;|&nbsp;&nbsp;3&nbsp;&nbsp;|&nbsp;&nbsp;1+2&nbsp;&nbsp;|&nbsp;&nbsp;1+3&nbsp;&nbsp;|&nbsp;&nbsp;2+3&nbsp;&nbsp;|&nbsp;&nbsp;1+2+3</span><strong>KLARTEXT</strong><span>Welche Schichten möchte der Mitarbeiter ausschließlich arbeiten?</span><span>Die Ziffern 1, 2 und 3 stehen für keine bestimmte Schicht. Du legst selbst fest, welche Ziffer z. B. Früh-, Spät- oder Nachtschicht bedeutet. Die Angaben steuern die automatische Verteilung. Danach kannst du den Plan manuell anpassen. Mehr dazu im Benutzerhandbuch und in den Videos.</span></span></label> 
     <input type="text" id="kollege1-schicht-praeferenz-input" name="kollege1-schicht-praeferenz-input" placeholder="" size="5"> <br>
     
     <button id="kollege1-hinzufuegen-btn">Aktualisieren</button> <br> 
@@ -320,7 +341,7 @@
     <label for="kollege2-wunschfrei-input">Wunschfrei</label> 
     <input type="date" id="kollege2-wunschfrei-input" name="kollege2-wunschfrei-input" min="2026-01-01">  <br>
 
-    <label for="kollege2-schicht-praeferenz-input">Schichten &nbsp;</label> 
+    <label for="kollege2-schicht-praeferenz-input">Schichten</label> 
     <input type="text" id="kollege2-schicht-praeferenz-input" name="kollege2-schicht-praeferenz-input" placeholder="" size="5"> <br>
     
     <button id="kollege2-hinzufuegen-btn">Aktualisieren</button> <br> 
@@ -349,7 +370,7 @@
     <label for="kollege3-wunschfrei-input">Wunschfrei</label> 
     <input type="date" id="kollege3-wunschfrei-input" name="kollege3-wunschfrei-input" min="2026-01-01">  <br>
 
-    <label for="kollege3-schicht-praeferenz-input">Schichten &nbsp;</label> 
+    <label for="kollege3-schicht-praeferenz-input">Schichten</label> 
     <input type="text" id="kollege3-schicht-praeferenz-input" name="kollege3-schicht-praeferenz-input" placeholder="" size="5"> <br>
     
     <button id="kollege3-hinzufuegen-btn">Aktualisieren</button> <br> 
@@ -378,7 +399,7 @@
     <label for="kollege4-wunschfrei-input">Wunschfrei</label> 
     <input type="date" id="kollege4-wunschfrei-input" name="kollege4-wunschfrei-input" min="2026-01-01">  <br>
 
-    <label for="kollege4-schicht-praeferenz-input">Schichten &nbsp;</label> 
+    <label for="kollege4-schicht-praeferenz-input">Schichten</label> 
     <input type="text" id="kollege4-schicht-praeferenz-input" name="kollege4-schicht-praeferenz-input" placeholder="" size="5"> <br>
     
     <button id="kollege4-hinzufuegen-btn">Aktualisieren</button> <br> 
@@ -407,7 +428,7 @@
     <label for="kollege5-wunschfrei-input">Wunschfrei</label> 
     <input type="date" id="kollege5-wunschfrei-input" name="kollege5-wunschfrei-input" min="2026-01-01">  <br>
 
-    <label for="kollege5-schicht-praeferenz-input">Schichten &nbsp;</label> 
+    <label for="kollege5-schicht-praeferenz-input">Schichten</label> 
     <input type="text" id="kollege5-schicht-praeferenz-input" name="kollege5-schicht-praeferenz-input" placeholder="" size="5"> <br>
     
     <button id="kollege5-hinzufuegen-btn">Aktualisieren</button> <br> 
@@ -439,7 +460,7 @@
     <label for="kollege6-wunschfrei-input">Wunschfrei</label> 
     <input type="date" id="kollege6-wunschfrei-input" name="kollege6-wunschfrei-input" min="2026-01-01">  <br>
 
-    <label for="kollege6-schicht-praeferenz-input">Schichten &nbsp;</label> 
+    <label for="kollege6-schicht-praeferenz-input">Schichten</label> 
     <input type="text" id="kollege6-schicht-praeferenz-input" name="kollege6-schicht-praeferenz-input" placeholder="" size="5"> <br>
     
     <button id="kollege6-hinzufuegen-btn">Aktualisieren</button> <br> 
@@ -468,7 +489,7 @@
     <label for="kollege7-wunschfrei-input">Wunschfrei</label> 
     <input type="date" id="kollege7-wunschfrei-input" name="kollege7-wunschfrei-input" min="2026-01-01">  <br>
 
-    <label for="kollege7-schicht-praeferenz-input">Schichten &nbsp;</label> 
+    <label for="kollege7-schicht-praeferenz-input">Schichten</label> 
     <input type="text" id="kollege7-schicht-praeferenz-input" name="kollege7-schicht-praeferenz-input" placeholder="" size="5"> <br>
     
     <button id="kollege7-hinzufuegen-btn">Aktualisieren</button> <br> 
@@ -497,7 +518,7 @@
     <label for="kollege8-wunschfrei-input">Wunschfrei</label> 
     <input type="date" id="kollege8-wunschfrei-input" name="kollege8-wunschfrei-input" min="2026-01-01">  <br>
 
-    <label for="kollege8-schicht-praeferenz-input">Schichten &nbsp;</label> 
+    <label for="kollege8-schicht-praeferenz-input">Schichten</label> 
     <input type="text" id="kollege8-schicht-praeferenz-input" name="kollege8-schicht-praeferenz-input" placeholder="" size="5"> <br>
     
     <button id="kollege8-hinzufuegen-btn">Aktualisieren</button> <br> 
@@ -526,7 +547,7 @@
     <label for="kollege9-wunschfrei-input">Wunschfrei</label> 
     <input type="date" id="kollege9-wunschfrei-input" name="kollege9-wunschfrei-input" min="2026-01-01">  <br>
 
-    <label for="kollege9-schicht-praeferenz-input">Schichten &nbsp;</label> 
+    <label for="kollege9-schicht-praeferenz-input">Schichten</label> 
     <input type="text" id="kollege9-schicht-praeferenz-input" name="kollege9-schicht-praeferenz-input" placeholder="" size="5"> <br>
     
     <button id="kollege9-hinzufuegen-btn">Aktualisieren</button> <br> 
@@ -555,7 +576,7 @@
     <label for="kollege0-wunschfrei-input">Wunschfrei</label> 
     <input type="date" id="kollege0-wunschfrei-input" name="kollege0-wunschfrei-input" min="2026-01-01">  <br>
 
-    <label for="kollege0-schicht-praeferenz-input">Schichten &nbsp;</label> 
+    <label for="kollege0-schicht-praeferenz-input">Schichten</label> 
     <input type="text" id="kollege0-schicht-praeferenz-input" name="kollege0-schicht-praeferenz-input" placeholder="" size="5"> <br>
     
     <button id="kollege0-hinzufuegen-btn">Aktualisieren</button> <br> 
@@ -580,9 +601,9 @@
       font-size: 0.82rem;
       color: #71828e;
   ">
-      <a href="../impressum.html" style="color:#8fa7b3; text-decoration:none;">Impressum</a>
+      <a href="/impressum/" style="color:#8fa7b3; text-decoration:none;">Impressum</a>
       <span style="margin:0 0.65rem; color:#3a4d58;">·</span>
-      <a href="../datenschutz.html" style="color:#8fa7b3; text-decoration:none;">Datenschutz</a>
+      <a href="/datenschutz/" style="color:#8fa7b3; text-decoration:none;">Datenschutz</a>
   </footer>
 
  <link rel="stylesheet" href="design.css?v=2">
@@ -660,6 +681,65 @@
         });
         document.addEventListener('keydown', function (event) {
             if (event.key === 'Escape' && !dialog.hidden) closeVideos();
+        });
+    })();
+
+    (function () {
+        const windowElement = document.getElementById('schnellstart-fenster');
+        const openButton = document.getElementById('schnellstart-btn');
+        const closeButton = document.getElementById('schnellstart-schliessen');
+        const header = document.getElementById('schnellstart-kopf');
+        let dragState = null;
+
+        function openSchnellstart() {
+            windowElement.hidden = false;
+            windowElement.style.display = 'block';
+            closeButton.focus();
+        }
+
+        function closeSchnellstart() {
+            windowElement.hidden = true;
+            windowElement.style.display = 'none';
+            openButton.focus();
+        }
+
+        openButton.addEventListener('click', openSchnellstart);
+        closeButton.addEventListener('click', closeSchnellstart);
+
+        header.addEventListener('pointerdown', function (event) {
+            if (event.target === closeButton) return;
+
+            const rect = windowElement.getBoundingClientRect();
+            windowElement.style.left = `${rect.left}px`;
+            windowElement.style.top = `${rect.top}px`;
+            windowElement.style.transform = 'none';
+            dragState = {
+                offsetX: event.clientX - rect.left,
+                offsetY: event.clientY - rect.top
+            };
+            header.setPointerCapture(event.pointerId);
+        });
+
+        header.addEventListener('pointermove', function (event) {
+            if (!dragState) return;
+
+            const maxLeft = Math.max(8, window.innerWidth - windowElement.offsetWidth - 8);
+            const maxTop = Math.max(8, window.innerHeight - windowElement.offsetHeight - 8);
+            const nextLeft = Math.min(maxLeft, Math.max(8, event.clientX - dragState.offsetX));
+            const nextTop = Math.min(maxTop, Math.max(8, event.clientY - dragState.offsetY));
+            windowElement.style.left = `${nextLeft}px`;
+            windowElement.style.top = `${nextTop}px`;
+        });
+
+        header.addEventListener('pointerup', function (event) {
+            dragState = null;
+            if (header.hasPointerCapture(event.pointerId)) {
+                header.releasePointerCapture(event.pointerId);
+            }
+        });
+
+        document.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape' && !windowElement.hidden) closeSchnellstart();
         });
     })();
  </script>

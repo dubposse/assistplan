@@ -2078,6 +2078,30 @@ a:hover {
     }
 }
 
+/* Keep calendar names and the monthly details mirror paper-friendly. */
+@media print {
+    .ep-col-name-input {
+        color: #000 !important;
+        -webkit-text-fill-color: #000 !important;
+        background: #fff !important;
+        border-color: transparent !important;
+    }
+
+    #monat-details-kollegen-spiegel,
+    .monat-details-kollegen-grid,
+    .monat-details-kollegen-abschnitt {
+        color: #000 !important;
+        background: #fff !important;
+        border-color: #cbd5e1 !important;
+        box-shadow: none !important;
+    }
+
+    .monat-details-kollegen-abschnitt strong,
+    .monat-details-kollegen-abschnitt span {
+        color: #000 !important;
+    }
+}
+
 
 /* =========================================================
    AssistPlan – V11 input contrast refinement
@@ -2410,6 +2434,109 @@ h1 {
     display: inline-flex !important;
 }
 
+#schnellstart-btn {
+    display: inline-flex !important;
+}
+
+#schnellstart-fenster {
+    position: fixed;
+    top: 18vh;
+    left: 50%;
+    z-index: 2100;
+    width: 420px;
+    min-width: 420px;
+    min-height: 220px;
+    max-width: 420px;
+    max-height: calc(100vh - 2rem);
+    overflow: auto;
+    resize: vertical;
+    border: 1px solid #294552;
+    border-left: 3px solid #22d3ee;
+    border-radius: 9px;
+    background: #0b141c;
+    color: #c9d6de;
+    box-shadow: 0 18px 55px rgba(0, 0, 0, 0.45);
+    transform: translateX(-50%);
+}
+
+#schnellstart-kopf {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.65rem 0.8rem;
+    border-bottom: 1px solid #263747;
+    background: #101c25;
+    cursor: move;
+    user-select: none;
+    touch-action: none;
+}
+
+#schnellstart-titel {
+    margin: 0;
+    color: #eef4f8;
+    font-size: 1rem;
+}
+
+#schnellstart-schliessen {
+    width: 28px;
+    min-width: 28px;
+    height: 28px;
+    min-height: 28px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: #81909f;
+    font-size: 1.25rem;
+    cursor: pointer;
+}
+
+#schnellstart-fenster > ol {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.7rem 1.2rem;
+    margin: 0;
+    padding: 0.9rem 1rem 1rem 2.2rem;
+    font-size: 0.78rem;
+    line-height: 1.4;
+}
+
+#schnellstart-fenster li::marker {
+    color: #55d9eb;
+    font-weight: 700;
+}
+
+#schnellstart-fenster li strong,
+#schnellstart-fenster li span {
+    display: block;
+}
+
+#schnellstart-fenster li strong {
+    color: #e5edf2;
+}
+
+#schnellstart-fenster li span {
+    color: #81909f;
+}
+
+#schnellstart-fenster li .schnellstart-optionen {
+    margin-top: 0.2rem;
+    color: #d9f9ff;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+}
+
+#schnellstart-fenster code {
+    color: #d9f9ff;
+    font-family: inherit;
+}
+
+@media print {
+    #schnellstart-btn,
+    #schnellstart-fenster {
+        display: none !important;
+    }
+}
+
 @media (min-width: 601px) {
     #monat-details-input-container .settings-header #assistplan-tools,
     #monat-details-input-container .settings-header #assistplan-tools button,
@@ -2540,4 +2667,121 @@ h1 {
     font-size: 1.05rem;
     line-height: 1;
     transform: translateX(0);
+}
+
+.schicht-hinweis {
+    position: relative;
+    display: inline-grid;
+    width: 1.05rem;
+    height: 1.05rem;
+    margin-left: 0.2rem;
+    place-items: center;
+    border: 1px solid #55d9eb;
+    border-radius: 50%;
+    color: #55d9eb;
+    font-size: 0.72rem;
+    font-weight: 700;
+    line-height: 1;
+    cursor: help;
+}
+
+.has-schicht-hinweis {
+    overflow: visible !important;
+}
+
+.has-schicht-hinweis label[for="kollege1-schicht-praeferenz-input"] {
+    position: relative;
+}
+
+.schicht-tooltip {
+    position: absolute;
+    bottom: calc(100% + 0.45rem);
+    left: 0;
+    z-index: 10;
+    width: min(340px, calc(100vw - 2rem));
+    padding: 0.55rem 0.65rem;
+    border: 1px solid #304251;
+    border-radius: 6px;
+    background: #101820;
+    color: #e5edf2;
+    font-size: 0.75rem;
+    font-weight: 400;
+    line-height: 1.4;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(0.25rem);
+    transition: opacity 0.12s ease, transform 0.12s ease;
+}
+
+.schicht-tooltip strong,
+.schicht-tooltip > span {
+    display: block;
+}
+
+.schicht-tooltip strong {
+    margin-bottom: 0.18rem;
+    color: #8ce9f4;
+    font-size: 0.72rem;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+}
+
+.schicht-tooltip .schicht-optionen {
+    margin-bottom: 0.6rem;
+    color: #ffffff;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+}
+
+.schicht-tooltip .schicht-optionen + strong {
+    margin-top: 0.15rem;
+}
+
+.schicht-hinweis:hover + .schicht-tooltip,
+.schicht-hinweis:focus-visible + .schicht-tooltip {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.schicht-hinweis:focus-visible {
+    outline: 2px solid #22d3ee;
+    outline-offset: 2px;
+}
+
+@media print {
+    .schicht-hinweis,
+    .schicht-tooltip {
+        display: none !important;
+    }
+}
+
+@media print {
+    #monat-details-kollegen-spiegel,
+    .monat-details-kollegen-grid,
+    .monat-details-kollegen-abschnitt {
+        color: #000 !important;
+        background: #fff !important;
+        border-color: #cbd5e1 !important;
+        box-shadow: none !important;
+    }
+
+    .monat-details-kollegen-abschnitt strong,
+    .monat-details-kollegen-abschnitt span {
+        color: #000 !important;
+    }
+
+    .ep-col-name-input,
+    .ep-col-row[data-col="header"] .ep-col-name-input {
+        color: #000 !important;
+        -webkit-text-fill-color: #000 !important;
+        background: #fff !important;
+        background-image: none !important;
+        border-color: #cbd5e1 !important;
+    }
+
+    #zoom-info-tooltip,
+    .ep-legend-popover,
+    .ep-legend-popover-btn {
+        display: none !important;
+    }
 }

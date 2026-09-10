@@ -20,7 +20,7 @@
 <body>
 <header class="header">
   <a class="brand" href="/"><i></i>AssistPlan</a>
-  <nav><a href="#funktionen">Funktionen</a><a href="#einsatz">Einsatz</a><a href="planung/benutzerhandbuch/">Benutzerhandbuch</a><a class="navcta" href="planung/">Planung starten</a></nav>
+  <nav><a href="#funktionen">Funktionen</a><a href="#einsatz">Einsatz</a><a href="/planung/benutzerhandbuch/">Benutzerhandbuch</a><a class="navcta" href="/planung/">Planung starten</a></nav>
 </header>
 
 <main>
@@ -29,7 +29,7 @@
     <p class="eyebrow">Digitale Personaleinsatzplanung</p>
     <h1>AssistPlan – Einsatzplanung einfach gemacht</h1>
     <p class="lead">Der digitale Einsatzplaner für kleine Teams. Mitarbeiter, Schichten und freie Tage übersichtlich planen, individuelle Wünsche berücksichtigen und den Einsatzplan automatisch vorplanen.</p>
-    <div class="actions"><a class="btn primary" href="planung/">Planung starten</a><a class="btn secondary" href="#funktionen">So funktioniert AssistPlan</a></div>
+    <div class="actions"><a class="btn primary" href="/planung/">Planung starten</a><a class="btn secondary" href="#funktionen">So funktioniert AssistPlan</a></div>
     <p class="note">Kostenlos · ohne Anmeldung · direkt im Browser</p>
   </div>
   <div class="preview" aria-label="Abstrakte Vorschau einer Einsatzplanung">
@@ -70,7 +70,7 @@
 <section class="final">
   <p class="eyebrow">Direkt ausprobieren</p><h2>Planung starten – ohne Einrichtung.</h2>
   <p>Keine Registrierung, kein Benutzerkonto und keine Installation.</p>
-  <a class="btn primary" href="planung/">AssistPlan starten</a>
+  <a class="btn primary" href="/planung/">AssistPlan starten</a>
 </section>
 </main>
 
@@ -78,16 +78,16 @@
   <section class="planning-device-dialog" role="dialog" aria-modal="true" aria-labelledby="planning-device-title" aria-describedby="planning-device-text">
     <button type="button" id="planning-device-close" class="planning-device-close" aria-label="Nutzungshinweis schließen">×</button>
     <h2 id="planning-device-title">Hinweis zur Nutzung</h2>
-    <p id="planning-device-text">Die Dienstplanung mit AssistPlan ist aktuell für Google Chrome auf Desktop-Geräten optimiert. Eine Nutzung auf Smartphones/Tablets wird derzeit nicht unterstützt.</p>
+    <p id="planning-device-text">AssistPlan unterstützt aktuell Google Chrome und Microsoft Edge auf Desktop-Geräten. Smartphones und Tablets werden derzeit nicht unterstützt.</p>
   </section>
 </div>
 
 <footer>
   <div><strong>AssistPlan</strong><small>Digitale Einsatzplanung für kleine Teams.</small></div>
-  <nav><a href="/planung/benutzerhandbuch/">Benutzerhandbuch</a><a href="https://github.com/dubposse/assistplan" rel="noopener noreferrer">GitHub</a><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></nav>
+  <nav><a href="/planung/benutzerhandbuch/">Benutzerhandbuch</a><a href="https://github.com/dubposse/assistplan" rel="noopener noreferrer">GitHub</a><a href="/impressum/">Impressum</a><a href="/datenschutz/">Datenschutz</a></nav>
 </footer>
 <script>
-  const planningLinks = document.querySelectorAll('a[href="planung/"]');
+  const planningLinks = document.querySelectorAll('a[href="/planung/"]');
   const planningDeviceNotice = document.getElementById('planning-device-notice');
 
   planningLinks.forEach((link) => {
